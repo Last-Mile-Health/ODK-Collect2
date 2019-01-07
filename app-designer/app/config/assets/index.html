@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link href="css/index.css" type="text/css" rel="stylesheet" />
+        <script type="text/javascript" src="commonDefinitions.js"></script>
+        <script type="text/javascript" src="libs/jquery-3.2.1.js"></script>
+        <script type="text/javascript" src="../../system/js/odkCommon.js"></script>
+        <script type="text/javascript" src="../../system/js/odkData.js"></script>
+        <script type="text/javascript" src="../../system/tables/js/odkTables.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
+    </head>
+
+    <body>
+        <h1>Community Based Information System</h1>
+        <hr class="header-divider" />
+
+        <div id="wrapper">
+          <button class="homescreen-button" type="button" id="new-form-button" onclick="launchNewForm()">
+            <div class="circle">
+              <img class="button-image" id="new-form-image" src="img/new_form.svg" />
+            </div>
+            <span class="button-text">New Form</span>
+          </button>
+
+          <button class="homescreen-button" type="button" id="edit-form-button" onclick="launchFormList()">
+            <div class="circle">
+              <img class="button-image" id="edit-form-image" src="img/edit_form.svg" />
+            </div>
+            <span class="button-text">Edit Form</span>
+          </button>
+
+          <button class="homescreen-button" type="button" id="view-stats-button" onclick="launchStatsView()">
+            <div class="circle">
+              <img class="button-image" id="view-stats-image" src="img/stats.svg" />
+            </div>
+            <span class="button-text">View Statistics</span>
+          </button>
+
+          <button class="homescreen-button" type="button" id="sync-button" onclick="launchSubmit()">
+            <div class="circle">
+              <img class="button-image" id="sync-image" src="img/sync.svg" />
+            </div>
+            <span class="button-text">Sync</span>
+          </button>
+        </div>
+    </body>
+</html>

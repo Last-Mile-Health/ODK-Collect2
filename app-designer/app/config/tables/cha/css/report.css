@@ -1,0 +1,122 @@
+/* CSS Stylesheet - List view */
+body {
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  background-color: white;
+}
+
+div {
+  position: relative;
+  margin: 0;
+}
+
+.header-block {
+  background-color: #3C3C3C;
+  margin-top: -10px;
+  height: 70px;
+  text-align: center;
+}
+
+h1 {
+  font-size: 12pt;
+  font-weight: bold;
+  margin: 10px 0;
+  text-align: center;
+  color: white;
+  padding: 15px;
+}
+
+form {
+  border: none;
+}
+
+fieldset {
+  border: none;
+}
+
+.filter-block {
+  margin: 0;
+  text-align: left;
+  padding: 10px;
+  background-color: #52B0C6;
+  font-size: 12pt;
+  color: white;
+  border: none;
+}
+
+.filter-label {
+  font-size: 14pt;
+  font-weight: bold;
+  color: white;
+  text-align: left;
+}
+
+.filter-image {
+  float: left;
+  position: absolute;
+  width: 35px;
+  height: 35px;
+  top: 50%;
+  left: 50%;
+}
+
+.filter-option {
+  padding: 5px;
+}
+
+#apply-button {
+  width: 30%;
+  height: 40px;
+  margin: 15px auto 15px;
+  border: none;
+  border-radius: 20px;
+  padding: 10px;
+  font-size: 12pt;
+  font-weight: normal;
+  color: #52B0C6;
+  background-color: white;
+  text-align: center;
+}
+
+.list {
+  overflow: auto;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+.stats-list-item {
+  display: block;
+  overflow: auto;
+  font-size: 12pt;
+  color: black;
+  padding: 30px;
+  background-color: #E0E0E0;
+  border-bottom: 1px solid #B7B7B7;
+}
+
+.stats-section-title {
+  float: left;
+  display: inline-block;
+  font-weight: bold;
+  margin-top: -10px;
+  margin-left: -10px;
+}
+
+.field-name {
+  float: left;
+  display: inline-block;
+  font-weight: normal;
+  text-align: left;
+  max-width: 220px;
+  margin-top: -10px;
+  margin-left: 10px;
+}
+
+.field-value {
+  float: right;
+  display: inline-block;
+  font-weight: bold;
+  margin-top: -10px;
+  margin-right: 10px;
+}

@@ -1,99 +1,179 @@
-/**
- * This is the file that will be creating the list view.
- */
-/* global $, control, data */
 'use strict';
 
-if (JSON.parse(control.getPlatformInfo()).container === 'Chrome') {
-    console.log('Welcome to Tables debugging in Chrome!');
-    $.ajax({
-        url: control.getFileAsUrl('output/debug/cha_data.json'),
-        async: false,  // do it first
-        success: function(dataObj) {
-            if (dataObj === undefined || dataObj === null) {
-                console.log('Could not load data json for table: cha');
-            }
-            window.data.setBackingObject(dataObj);
-        }
-    });
+$(function() {
+  odkData.query('cha', null, null, null, null, null, null, null, null, true, processQueryResults, queryFailure);
+});
+
+function queryFailure(error) {
+    console.log('cha query CB error : ' + error);
+};
+
+function processQueryResults(resultSet) {
+  var list = $('#form-list')
+  var tableId = resultSet.getTableId();
+
+  for (var i = 0; i < resultSet.getCount(); i++) {
+    var rowId = resultSet.getRowId(i);
+    var reportingMonth = resultSet.getData(i, 'reporting_month');
+    var reportingYear = resultSet.getData(i, 'reporting_year');
+    var buttonText = buildButtonText(reportingMonth, reportingYear)
+    buildListItem(rowId, tableId, buttonText, list);
+  }
+};
+
+function buildListItem(rowId, tableId, buttonText, list) {
+  var list_item = $('<div>');
+  list_item.attr('id', rowId);
+  list_item.attr('rowId', rowId);
+  list_item.attr('class', 'list-item');
+
+  var circle = $('<div>');
+  circle.attr('class', 'circle');
+  var edit_form_image = $('<img>');
+  edit_form_image.attr('class', "button-image edit-form-image")
+  edit_form_image.attr('src', "../../../assets/img/edit_form.svg")
+  circle.append(edit_form_image)
+  list_item.append(circle)
+
+  var button_text = $('<span>');
+  button_text.attr('class', 'button-text');
+  button_text.text(buttonText)
+  list_item.append(button_text)
+
+  var go_arrow = $('<div>');
+  go_arrow.attr('class', 'go-arrow');
+  var go_arrow_image = $('<img>');
+  go_arrow_image.attr('class', "button-image go-arrow-image")
+  go_arrow_image.attr('src', "../../../assets/img/go_arrow.svg")
+  go_arrow.append(go_arrow_image)
+  list_item.append(go_arrow)
+
+  list_item.click(function(e) {
+    odkTables.editRowWithSurvey(null, tableId, rowId, 'cha');
+  });
+
+  list.append(list_item)
 }
 
-// Use chunked list view for larger tables: We want to chunk the displays so
-// that there is less load time.
-            
-/**
- * Called when page loads. idxStart is the index of the row that should be
- * displayed at this iteration through the loop.
- */
-var resumeFn = function(idxStart) {
+function buildButtonText(reportingMonth, reportingYear) {
+  var monthString = ""
+  switch(reportingMonth) {
+    case "1":
+      monthString = "January";
+      break;
+    case "2":
+      monthString = "February";
+      break;
+    case "3":
+      monthString = "March";
+      break;
+    case "4":
+      monthString = "April";
+      break;
+    case "5":
+      monthString = "May";
+      break;
+    case "6":
+      monthString = "June";
+      break;
+    case "7":
+      monthString = "July";
+      break;
+    case "8":
+      monthString = "August";
+      break;
+    case "9":
+      monthString = "September";
+      break;
+    case "10":
+      monthString = "October";
+      break;
+    case "11":
+      monthString = "November";
+      break;
+    case "12":
+      monthString = "December";
+      break;
+  }
 
-    console.log('resumeFn called. idxStart: ' + idxStart);
-    // The first time through construct any constants you need to refer to
-    // and set the click handler on the list elements.
-    if (idxStart === 0) {
-        // This add a click handler on the wrapper ul that will handle all of
-        // the clicks on its children.
-        $('#list').click(function(e) {
-            var tableId = data.getTableId();
-            // We have set the rowId while as the li id. However, we may have
-            // clicked on the li or anything in the li. Thus we need to get
-            // the original li, which we'll do with jQuery's closest()
-            // method. First, however, we need to wrap up the target
-            // element in a jquery object.
-            // wrap up the object so we can call closest()
-            var jqueryObject = $(e.target);
-            // we want the closest thing with class item_space, which we
-            // have set up to have the row id
-            var containingDiv = jqueryObject.closest('.item_space');
-            var rowId = containingDiv.attr('rowId');
-            console.log('clicked with rowId: ' + rowId);
-            // make sure we retrieved the rowId
-            if (rowId !== null && rowId !== undefined) {
-                // we'll pass null as the relative path to use the default file
-                control.openDetailView(tableId, rowId, null);
-            }
-        });
-    }
-    
-    return (function() {
-        displayGroup(idxStart);
-    }());
-};
-            
-/**
- * Displays the list view in chunks. The number of list entries per chunk
- * can be modified. The list view is designed so that each row in the table is
- * represented as a list item. If you click a particular list item, it will
- * call the click handler defined in resumeFn. In the example case it opens
- * a detail view on the clicked row.
- */
-var displayGroup = function(idxStart) {
-    // Number of rows displayed per chunk
-    var chunk = 50;
-    for (var i = idxStart; i < idxStart + chunk; i++) {
-        if (i >= data.getCount()) {
-            break;
+  return "CHA: " + monthString + " " + reportingYear
+}
+
+
+
+
+
+
+
+
+
+/*
+
+// Display the list of cha results
+function displayGroup(chaResultSet) {
+
+    // Set the function to call when a list item is clicked
+    $('#form-list').click(function(e) {
+
+        // Retrieve the row ID from the item_space attribute
+        var jqueryObject = $(e.target);
+        var containingDiv = jqueryObject.closest('.list-item');
+        var rowId = containingDiv.attr('rowId');
+
+        // Retrieve the tableID from the query results
+        var tableId = chaResultSet.getTableId();
+
+        if (rowId !== null && rowId !== undefined) {
+
+            // Opens the detail view from the file specified in
+            // the properties worksheet
+            odkTables.openDetailView(null, tableId, rowId, null);
         }
+    });
 
-        // Creates the space for a single element in the list. We add rowId as
-        // an attribute so that the click handler set in resumeFn knows which
-        // row was clicked.
-        var item = $('<li>');
-        item.attr('rowId', data.getRowId(i));
-        item.attr('class', 'item_space');
-        item.text(data.getData(i, 'Name'));
-                
-        /* Creates arrow icon (Nothing to edit here) */
+    // Iterate through the query results, rendering list items
+    for (var i = 0; i < chaResultSet.getCount(); i++) {
+
+        // Creates the item space and stores the row ID in it
+        var item = $('<div>');
+        item.attr('id', chaResultSet.getRowId(i));
+        item.attr('rowId', chaResultSet.getRowId(i));
+        item.attr('class', 'list-item');
+
+        // Create the span to house the text
+        var itemText = $('span');
+        itemText.attr('class', 'button-text')
+
+        // Display the reporting month and year
+        var month = chaResultSet.getData(i, 'reporting_month'); // TODO: Show what Nick said
+        var year = chaResultSet.getData(i, 'reporting_year');
+        if (month === null || month === undefined || year === null || year ==== undefined) {
+            month = 'Unknown reporting date';
+        }
+        itemText.text(month + " " + year);
+
+        // Creates arrow icon
+        /
         var chevron = $('<img>');
-        chevron.attr('src', control.getFileAsUrl('assets/img/little_arrow.png'));
+        chevron.attr('src', odkCommon.getFileAsUrl('config/assets/img/little_arrow.png'));
         chevron.attr('class', 'chevron');
         item.append(chevron);
+        *
 
-        // Add any other details in your list item here.
-                
-        $('#list').append(item);
-    }
-    if (i < data.getCount()) {
-        setTimeout(resumeFn, 0, i);
-    }
+        // Add the item to the list
+        $('#form-list').append(item);
+
+        // Don't append the last one to avoid the fencepost problem
+        var borderDiv = $('<div>');
+        borderDiv.addClass('divider');
+        $('#list').append(borderDiv);
+      }
+      if (i < chaResultSet.getCount()) {
+          setTimeout(resumeFn, 0, i);
+      }
 };
+
+function cbFailure(error) {
+    console.log('cha getViewData CB error : ' + error);
+};
+*/

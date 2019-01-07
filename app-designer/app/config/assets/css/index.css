@@ -1,0 +1,116 @@
+/* CSS Stylesheet - Homescreen*/
+body {
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  background-color: #3C3C3C;
+}
+
+h1 {
+  font-size: 12pt;
+  font-weight: bold;
+  margin: 10px 0;
+  text-align: center;
+  color: white;
+}
+
+hr.header-divider {
+  clear: both;
+  border: 0;
+  height: 2px;
+  background: white;
+  text-align: center;
+  width: 30%;
+  margin-top: 15px;
+  margin-bottom: 20px;
+}
+
+div {
+  position: relative;
+  margin: 0;
+}
+
+#wrapper {
+  overflow: auto;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+button {
+  width: 90%;
+  max-width: 500px;
+  height: 80px;
+  margin: 0 auto 15px;
+  border: none;
+  border-radius: 20px;
+  padding: 15px;
+  text-align: left;
+}
+
+.circle {
+  float: left;
+  background: white;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-top: 2px;
+}
+
+.button-image {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}
+
+#new-form-image {
+  width: 20px;
+  height: 20px;
+  margin-top: -10px;
+  margin-left: -10px;
+}
+
+#edit-form-image {
+  width: 30px;
+  height: 30px;
+  margin-top: -15px;
+  margin-left: -15px;
+}
+
+#view-stats-image {
+  width: 20px;
+  height: 20px;
+  margin-top: -10px;
+  margin-left: -10px;
+}
+
+#sync-image {
+  width: 30px;
+  height: 30px;
+  margin-top: -15px;
+  margin-left: -15px;
+}
+
+.button-text {
+  display: inline-block;
+  font-size: 20pt;
+  font-weight: medium;
+  color: white;
+  margin-left: 20px;
+  margin-top: 5px;
+}
+
+#new-form-button {
+  background-color: #007CC3;
+}
+
+#edit-form-button {
+  background-color: #05603D;
+}
+
+#view-stats-button {
+  background-color: #7153A1;
+}
+
+#sync-button {
+  background-color: #AC1E00;
+}

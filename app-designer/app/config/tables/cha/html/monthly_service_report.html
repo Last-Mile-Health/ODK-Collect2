@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="../css/report.css" type="text/css" rel="stylesheet" />
+    <script type="text/javascript" src="../../../assets/commonDefinitions.js"></script>
+    <script type="text/javascript" src="../tableSpecificDefinitions.js"></script>
+    <script type="text/javascript" src="../../../assets/libs/jquery-3.2.1.js"></script>
+    <script type="text/javascript" src="../../../../system/js/odkCommon.js"></script>
+    <script type="text/javascript" src="../../../../system/js/odkData.js"></script>
+    <script type="text/javascript" src="../../../../system/tables/js/odkTables.js"></script>
+    <script type="text/javascript" src="../js/monthly_service_report.js"></script>
+  </head>
+
+  <body>
+    <div class="header-block">
+      <h1>Monthly <br /> Service Report</h1>
+    </div>
+
+    <form id="filter"class="filter-block">
+      <fieldset>
+        <legend class="filter-label">Filter:</legend>
+        <div class="filte-radio">
+          <div class="filter-option">
+            <input type="radio" name="filter-input" id="no-filter" value="none" checked>
+            <label for="no-filter">No Filter</label>
+          </div>
+          <div class="filter-option">
+            <input type="radio" name="filter-input" id="this-month-filter" value="thisMonth">
+            <label for="this-month-filter">This Month</label>
+          </div>
+          <div class="filter-option">
+            <input type="radio" name="filter-input" id="last-month-filter" value="lastMonth">
+            <label for="last-month-filter">Last Month</label>
+          </div>
+          <div class="filter-option">
+            <input type="radio" name="filter-input" id="three-month-filter" value="threeMonths">
+            <label for="three-month-filter">Last Three Months</label>
+          </div>
+        </div>
+        <div>
+          <button type="submit" id="apply-button">Apply</button>
+        </div>
+      </fieldset>
+    </form>
+
+    <div class="list">
+
+      <div class="stats-list-item">
+        <span class="stats-section-title">Routine Visit:</span>
+      </div>
+
+      <div class="stats-list-item">
+        <span class="field-name">Routine household visits</span>
+        <span class="field-value" id='household_visits'>0</span>
+      </div>
+      <div class="stats-list-item">
+        <span class="field-name">Births (community/home)</span>
+        <span class="field-value" id='births_home'>0</span>
+      </div>
+      <div class="stats-list-item">
+        <span class="field-name">Births (facility)</span>
+        <span class="field-value" id='births_facility'>0</span>
+      </div>
+      <div class="stats-list-item">
+        <span class="field-name">Still births</span>
+        <span class="field-value" id='still_births'>0</span>
+      </div>
+      <div class="stats-list-item">
+        <span class="field-name">Neonatal deaths</span>
+        <span class="field-value" id='neonatal_deaths'>0</span>
+      </div>
+      <div class="stats-list-item">
+        <span class="field-name">Post-neonatal deaths</span>
+        <span class="field-value" id='post_neonatal_deaths'>0</span>
+      </div>
+      <div class="stats-list-item">
+        <span class="field-name">Child deaths</span>
+        <span class="field-value" id='child_deaths'>0</span>
+      </div>
+      <div class="stats-list-item">
+        <span class="field-name">Maternal deaths</span>
+        <span class="field-value" id='maternal_deaths'>0</span>
+      </div>
+      <div class="stats-list-item">
+        <span class="field-name">Community triggers</span>
+        <span class="field-value" id='community_triggers'>0</span>
+      </div>
+      <div class="stats-list-item">
+        <span class="field-name">HIV, TB, neglected tropical disease, mental health suspect referrals</span>
+        <span class="field-value" id='suspect_referrals'>0</span>
+      </div>
+      <div class="stats-list-item">
+        <span class="field-name">Deaths (over 5) in the community/home</span>
+        <span class="field-value" id='deaths_home'>0</span>
+      </div>
+
+      <div class="stats-list-item">
+        <span class="stats-section-title">RMNH:</span>
+      </div>
+
+      <div class="stats-list-item">
+        <span class="field-name">Pregnant woman visits</span>
+        <span class="field-value" id='pregnant_visits'>0</span>
+      </div>
+      <div class="stats-list-item">
+        <span class="field-name">Clients referred for delivery</span>
+        <span class="field-value" id='clients_referred_delivery'>0</span>
+      </div>
+      <div class="stats-list-item">
+        <span class="field-name">Referred for ANC visit</span>
+        <span class="field-value" id='referred_anc_visit'>0</span>
+      </div>
+      <div class="stats-list-item">
+        <span class="field-name">Post natal visits</span>
+        <span class="field-value" id='post_natal_visits'>0</span>
+      </div>
+      <div class="stats-list-item">
+        <span class="field-name">Clients referred for woman and newborn danger signs</span>
+        <span class="field-value" id='clients_referred_maternal_danger_sign'>0</span>
+      </div>
+      <div class="stats-list-item">
+        <span class="field-name">HBMNC within 48 hours - Mother</span>
+        <span class="field-value" id='hbmnc_within_two_days_mother'>0</span>
+      </div>
+      <div class="stats-list-item">
+        <span class="field-name">HBMNC within 48 hours - Infant</span>
+        <span class="field-value" id='hbmnc_within_two_days_infant'>0</span>
+      </div>
+      <div class="stats-list-item">
+        <span class="field-name">Clients currently using modern family planning</span>
+        <span class="field-value" id='clients_using_family_planning'>0</span>
+      </div>
+
+      <div class="stats-list-item">
+        <span class="stats-section-title">ICCM:</span>
+      </div>
+
+      <div class="stats-list-item">
+        <span class="field-name">Active case finds</span>
+        <span class="field-value" id='active_case_finds'>0</span>
+      </div>
+      <div class="stats-list-item">
+        <span class="field-name">Red MUAC (severe malnutrition)</span>
+        <span class="field-value" id='red_muac'>0</span>
+      </div>
+      <div class="stats-list-item">
+        <span class="field-name">Yellow MUAC (moderate malnutrition)</span>
+        <span class="field-value" id='yellow_muac'>0</span>
+      </div>
+      <div class="stats-list-item">
+        <span class="field-name">Green MUAC</span>
+        <span class="field-value" id='green_muac'>0</span>
+      </div>
+      <div class="stats-list-item">
+        <span class="field-name">Pneumonia cases identified</span>
+        <span class="field-value" id='pneumonia_cases_identified'>0</span>
+      </div>
+      <div class="stats-list-item">
+        <span class="field-name">Malaria cases identified (RDT postive)</span>
+        <span class="field-value" id='malaria_cases_identified'>0</span>
+      </div>
+      <div class="stats-list-item">
+        <span class="field-name">Diarrhea cases identified</span>
+        <span class="field-value" id='diarrhea_cases_identified'>0</span>
+      </div>
+      <div class="stats-list-item">
+        <span class="field-name">Pneumonia patients treated with antibiotics</span>
+        <span class="field-value" id='pneumonia_patients_treated'>0</span>
+      </div>
+      <div class="stats-list-item">
+        <span class="field-name">Malaria patients treated (2-11 months)</span>
+        <span class="field-value" id='malaria_infants_treated'>0</span>
+      </div>
+      <div class="stats-list-item">
+        <span class="field-name">Malaria patients treated (1-5 years)</span>
+        <span class="field-value" id='malaria_children_treated'>0</span>
+      </div>
+      <div class="stats-list-item">
+        <span class="field-name">Malaria patients treated in less than 24 hours</span>
+        <span class="field-value" id='malaria_patients_treated_under_day'>0</span>
+      </div>
+      <div class="stats-list-item">
+        <span class="field-name">Malaria patients treated in more than 24 hours</span>
+        <span class="field-value" id='malaria_patients_treated_over_day'>0</span>
+      </div>
+      <div class="stats-list-item">
+        <span class="field-name">Diarrhea patients treated with zinc and ORS</span>
+        <span class="field-value" id='diarrhea_patients_treated_zinc_ors'>0</span>
+      </div>
+      <div class="stats-list-item">
+        <span class="field-name">iCCM patients returned to health facility</span>
+        <span class="field-value" id='iccem_patients_referred'>0</span>
+      </div>
+
+      <div class="stats-list-item">
+        <span class="stats-section-title">HIV, TB, NTB, Mental Health:</span>
+      </div>
+
+      <div class="stats-list-item">
+        <span class="field-name">HIV client visits</span>
+        <span class="field-value" id='hiv_client_visits'>0</span>
+      </div>
+      <div class="stats-list-item">
+        <span class="field-name">Tuberculosis (TB) client visits</span>
+        <span class="field-value" id='tb_client_visits'>0</span>
+      </div>
+      <div class="stats-list-item">
+        <span class="field-name">Neglected tropical diseases (NTD) client visits</span>
+        <span class="field-value" id='neglected_ntd_client_visits'>0</span>
+      </div>
+      <div class="stats-list-item">
+        <span class="field-name">Mental health client visits</span>
+        <span class="field-value" id='mental_health_client_visits'>0</span>
+      </div>
+      <div class="stats-list-item">
+        <span class="field-name">Lost to follow-up (LTFU) HIV clients traced</span>
+        <span class="field-value" id='ltfu_hiv_clients_traced'>0</span>
+      </div>
+      <div class="stats-list-item">
+        <span class="field-name">Lost to follow-up (LTFU) Tuberculosis (TB) clients traced</span>
+        <span class="field-value" id='ltfu_tb_clients_traced'>0</span>
+      </div>
+    </div>
+  </body>
+</html>
