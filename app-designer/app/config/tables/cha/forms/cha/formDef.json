@@ -20,7 +20,7 @@
         "setting_name": "survey",
         "display": {
           "title": {
-            "text": "CHA"
+            "text": "Monthly Report"
           }
         },
         "_row_num": 5
@@ -56,7 +56,7 @@
         "name": "chss_id",
         "display": {
           "prompt": {
-            "text": "CHSS ID:"
+            "text": "Your Supervisor (CHSS) ID:"
           }
         },
         "required": 1,
@@ -67,7 +67,7 @@
         "name": "chss_name",
         "display": {
           "prompt": {
-            "text": "Your (CHSS) name:"
+            "text": "Your Supervisor (CHSS) Name:"
           }
         },
         "required": 1,
@@ -78,7 +78,7 @@
         "name": "supervised_cha_id",
         "display": {
           "prompt": {
-            "text": "Supervised CHA ID:"
+            "text": "Your (CHA) ID:"
           }
         },
         "required": 1,
@@ -89,7 +89,7 @@
         "name": "supervised_cha_name",
         "display": {
           "prompt": {
-            "text": "Supervised CHA Name:"
+            "text": "Your (CHA) Name:"
           }
         },
         "required": 1,
@@ -131,79 +131,512 @@
         "_row_num": 12
       },
       {
-        "clause": "end screen",
+        "type": "select_one",
+        "name": "highest_module",
+        "display": {
+          "prompt": {
+            "text": "Highest CHA Program Module that CHA has completed"
+          }
+        },
+        "required": 1,
+        "values_list": "modules",
         "_row_num": 13
       },
       {
-        "branch_label": "choose_module",
+        "clause": "end screen",
         "_row_num": 14
       },
       {
-        "type": "user_branch",
-        "name": "module",
-        "display": {
-          "prompt": {
-            "text": "Fill each NCHAP Module that CHA has completed"
-          }
-        },
-        "values_list": "modules",
+        "clause": "goto end",
+        "condition": "data('highest_module') < 1",
+        "_row_num": 15
+      },
+      {
+        "clause": "begin screen",
         "_row_num": 16
       },
       {
-        "clause": "goto end",
+        "type": "integer",
+        "name": "household_visits",
+        "display": {
+          "prompt": {
+            "text": "1.2A - # of Routine Household Visits"
+          }
+        },
+        "required": "data('highest_module') >= 1",
         "_row_num": 17
       },
       {
-        "branch_label": "module1",
+        "type": "integer",
+        "name": "births_home",
+        "display": {
+          "prompt": {
+            "text": "1.2B - # of Births (community/home)"
+          }
+        },
+        "required": "data('highest_module') >= 1",
         "_row_num": 18
       },
       {
-        "clause": "do section module1",
+        "type": "integer",
+        "name": "births_facility",
+        "display": {
+          "prompt": {
+            "text": "1.2C - # of Births (facility)"
+          }
+        },
+        "required": "data('highest_module') >= 1",
         "_row_num": 19
       },
       {
-        "clause": "goto choose_module",
+        "type": "integer",
+        "name": "still_births",
+        "display": {
+          "prompt": {
+            "text": "1.2D - # of Still Births"
+          }
+        },
+        "required": "data('highest_module') >= 1",
         "_row_num": 20
       },
       {
-        "branch_label": "module2",
+        "type": "integer",
+        "name": "neonatal_deaths",
+        "display": {
+          "prompt": {
+            "text": "1.2E - # of Neonatal Deaths"
+          }
+        },
+        "required": "data('highest_module') >= 1",
         "_row_num": 21
       },
       {
-        "clause": "do section module2",
+        "type": "integer",
+        "name": "post_neonatal_deaths",
+        "display": {
+          "prompt": {
+            "text": "1.2F - # of Post-neonatal Deaths"
+          }
+        },
+        "required": "data('highest_module') >= 1",
         "_row_num": 22
       },
       {
-        "clause": "goto choose_module",
+        "type": "integer",
+        "name": "child_deaths",
+        "display": {
+          "prompt": {
+            "text": "1.2G - # of Child Deaths"
+          }
+        },
+        "required": "data('highest_module') >= 1",
         "_row_num": 23
       },
       {
-        "branch_label": "module3",
+        "type": "integer",
+        "name": "maternal_deaths",
+        "display": {
+          "prompt": {
+            "text": "1.2H - # of Maternal Deaths"
+          }
+        },
+        "required": "data('highest_module') >= 1",
         "_row_num": 24
       },
       {
-        "clause": "do section module3",
+        "type": "integer",
+        "name": "community_triggers",
+        "display": {
+          "prompt": {
+            "text": "1.2I - # of Community Triggers"
+          }
+        },
+        "required": "data('highest_module') >= 1",
         "_row_num": 25
       },
       {
-        "clause": "goto choose_module",
+        "type": "integer",
+        "name": "suspect_referrals",
+        "display": {
+          "prompt": {
+            "text": "1.2J - # of HIV, TB, Neglected Tropical Disease, Mental Health Suspect Referrals"
+          }
+        },
+        "required": "data('highest_module') >= 1",
         "_row_num": 26
       },
       {
-        "branch_label": "module4",
+        "type": "integer",
+        "name": "deaths_home",
+        "display": {
+          "prompt": {
+            "text": "1.2K - # of Deaths (over 5 years) in the community/home"
+          }
+        },
+        "required": "data('highest_module') >= 1",
         "_row_num": 27
       },
       {
-        "clause": "do section module4",
+        "clause": "end screen",
         "_row_num": 28
       },
       {
-        "clause": "goto choose_module",
+        "clause": "goto end",
+        "condition": "data('highest_module') < 2",
         "_row_num": 29
       },
       {
-        "branch_label": "end",
+        "clause": "begin screen",
         "_row_num": 30
+      },
+      {
+        "type": "integer",
+        "name": "pregnant_visits",
+        "display": {
+          "prompt": {
+            "text": "2.1A - # of Pregnant Woman Visits"
+          }
+        },
+        "required": "data('highest_module') >= 2",
+        "_row_num": 31
+      },
+      {
+        "type": "integer",
+        "name": "clients_referred_delivery",
+        "display": {
+          "prompt": {
+            "text": "2.1B - # of Clients Referred For Delivery"
+          }
+        },
+        "required": "data('highest_module') >= 2",
+        "_row_num": 32
+      },
+      {
+        "type": "integer",
+        "name": "referred_anc_visit",
+        "display": {
+          "prompt": {
+            "text": "2.1C - # of Referred for ANC Visit"
+          }
+        },
+        "required": "data('highest_module') >= 2",
+        "_row_num": 33
+      },
+      {
+        "type": "integer",
+        "name": "post_natal_visits",
+        "display": {
+          "prompt": {
+            "text": "2.1D - # of Post Natal Visits"
+          }
+        },
+        "required": "data('highest_module') >= 2",
+        "_row_num": 34
+      },
+      {
+        "type": "integer",
+        "name": "clients_referred_maternal_danger_sign",
+        "display": {
+          "prompt": {
+            "text": "2.1 E - # of Clients Referred for Woman & Newborn Danger Sign"
+          }
+        },
+        "required": "data('highest_module') >= 2",
+        "_row_num": 35
+      },
+      {
+        "type": "integer",
+        "name": "hbmnc_within_two_days_mother",
+        "display": {
+          "prompt": {
+            "text": "2.1F - # of HBMNC within 48 hours – Mother"
+          },
+          "hint": {
+            "text": "Number of mothers who received home based maternal and neonatal care (HBMNC) within two days after birth or after returning from the facility"
+          }
+        },
+        "required": "data('highest_module') >= 2",
+        "_row_num": 36
+      },
+      {
+        "type": "integer",
+        "name": "hbmnc_within_two_days_infant",
+        "display": {
+          "prompt": {
+            "text": "2.1G - # of HBMNC within 48 hours – Infant"
+          },
+          "hint": {
+            "text": "Number of newborns who received home based maternal and neonatal care (HBMNC) within two days after birth or after returning from the facility"
+          }
+        },
+        "required": "data('highest_module') >= 2",
+        "_row_num": 37
+      },
+      {
+        "type": "integer",
+        "name": "clients_using_family_planning",
+        "display": {
+          "prompt": {
+            "text": "2.2A - # of Clients Currently Using Modern Family Planning"
+          }
+        },
+        "required": "data('highest_module') >= 2",
+        "_row_num": 38
+      },
+      {
+        "clause": "end screen",
+        "_row_num": 39
+      },
+      {
+        "clause": "goto end",
+        "condition": "data('highest_module') < 3",
+        "_row_num": 40
+      },
+      {
+        "clause": "begin screen",
+        "_row_num": 41
+      },
+      {
+        "type": "integer",
+        "name": "active_case_finds",
+        "display": {
+          "prompt": {
+            "text": "3.1A - # of Active Case Finds"
+          }
+        },
+        "required": "data('highest_module') >= 3",
+        "_row_num": 42
+      },
+      {
+        "type": "integer",
+        "name": "red_muac",
+        "display": {
+          "prompt": {
+            "text": "3.1B - # of Red MUAC (severe malnutrition)"
+          }
+        },
+        "required": "data('highest_module') >= 3",
+        "_row_num": 43
+      },
+      {
+        "type": "integer",
+        "name": "yellow_muac",
+        "display": {
+          "prompt": {
+            "text": "3.1C - # of Yellow MUAC (moderate malnutrition)"
+          }
+        },
+        "required": "data('highest_module') >= 3",
+        "_row_num": 44
+      },
+      {
+        "type": "integer",
+        "name": "green_muac",
+        "display": {
+          "prompt": {
+            "text": "3.1D - # of Green MUAC"
+          }
+        },
+        "required": "data('highest_module') >= 3",
+        "_row_num": 45
+      },
+      {
+        "type": "integer",
+        "name": "pneumonia_cases_identified",
+        "display": {
+          "prompt": {
+            "text": "3.1E - # of Pneumonia Cases Identified"
+          }
+        },
+        "required": "data('highest_module') >= 3",
+        "_row_num": 46
+      },
+      {
+        "type": "integer",
+        "name": "malaria_cases_identified",
+        "display": {
+          "prompt": {
+            "text": "3.1F - # of Malaria Cases Identified (RDT positive)"
+          }
+        },
+        "required": "data('highest_module') >= 3",
+        "_row_num": 47
+      },
+      {
+        "type": "integer",
+        "name": "diarrhea_cases_identified",
+        "display": {
+          "prompt": {
+            "text": "3.1G - # of Diarrhea Cases Identified"
+          }
+        },
+        "required": "data('highest_module') >= 3",
+        "_row_num": 48
+      },
+      {
+        "type": "integer",
+        "name": "pneumonia_patients_treated",
+        "display": {
+          "prompt": {
+            "text": "3.1H - # of Pneumonia Patients Treated with Antibiotics"
+          }
+        },
+        "required": "data('highest_module') >= 3",
+        "_row_num": 49
+      },
+      {
+        "type": "integer",
+        "name": "malaria_infants_treated",
+        "display": {
+          "prompt": {
+            "text": "3.1I - # of Malaria Patients Treated (2-11 months)"
+          }
+        },
+        "required": "data('highest_module') >= 3",
+        "_row_num": 50
+      },
+      {
+        "type": "integer",
+        "name": "malaria_children_treated",
+        "display": {
+          "prompt": {
+            "text": "3.1J - # of Malaria Patients Treated (1-5 years)"
+          }
+        },
+        "required": "data('highest_module') >= 3",
+        "_row_num": 51
+      },
+      {
+        "type": "integer",
+        "name": "malaria_patients_treated_under_day",
+        "display": {
+          "prompt": {
+            "text": "3.1K - # of Malaria Patients Treated in Less than 24 Hours"
+          }
+        },
+        "required": "data('highest_module') >= 3",
+        "_row_num": 52
+      },
+      {
+        "type": "integer",
+        "name": "malaria_patients_treated_over_day",
+        "display": {
+          "prompt": {
+            "text": "3.1L - # of Malaria Patients Treated in More than 24 Hours"
+          }
+        },
+        "required": "data('highest_module') >= 3",
+        "_row_num": 53
+      },
+      {
+        "type": "integer",
+        "name": "diarrhea_patients_treated_zinc_ors",
+        "display": {
+          "prompt": {
+            "text": "3.1M - # of Diarrhea Patients Treated with Zinc & ORS"
+          }
+        },
+        "required": "data('highest_module') >= 3",
+        "_row_num": 54
+      },
+      {
+        "type": "integer",
+        "name": "iccem_patients_referred",
+        "display": {
+          "prompt": {
+            "text": "3.1N - # of iCCM Patients Referred to Health Facility"
+          }
+        },
+        "required": "data('highest_module') >= 3",
+        "_row_num": 55
+      },
+      {
+        "clause": "end screen",
+        "_row_num": 56
+      },
+      {
+        "clause": "goto end",
+        "condition": "data('highest_module') < 4",
+        "_row_num": 57
+      },
+      {
+        "clause": "begin screen",
+        "_row_num": 58
+      },
+      {
+        "type": "integer",
+        "name": "hiv_client_visits",
+        "display": {
+          "prompt": {
+            "text": "4.1A - # of HIV Client Visits"
+          }
+        },
+        "required": "data('highest_module') >= 4",
+        "_row_num": 59
+      },
+      {
+        "type": "integer",
+        "name": "tb_client_visits",
+        "display": {
+          "prompt": {
+            "text": "4.1B - # of Tuberculosis (TB) Client Visits"
+          }
+        },
+        "required": "data('highest_module') >= 4",
+        "_row_num": 60
+      },
+      {
+        "type": "integer",
+        "name": "neglected_ntd_client_visits",
+        "display": {
+          "prompt": {
+            "text": "4.1C - # of Neglected Tropical Disease (NTD) Client Visits"
+          }
+        },
+        "required": "data('highest_module') >= 4",
+        "_row_num": 61
+      },
+      {
+        "type": "integer",
+        "name": "mental_health_client_visits",
+        "display": {
+          "prompt": {
+            "text": "4.1D - # of Mental Health Client Visits"
+          }
+        },
+        "required": "data('highest_module') >= 4",
+        "_row_num": 62
+      },
+      {
+        "type": "integer",
+        "name": "ltfu_hiv_clients_traced",
+        "display": {
+          "prompt": {
+            "text": "4.1E - # of Lost to Follow-up (LTFU) HIV Clients Traced"
+          }
+        },
+        "required": "data('highest_module') >= 4",
+        "_row_num": 63
+      },
+      {
+        "type": "integer",
+        "name": "ltfu_tb_clients_traced",
+        "display": {
+          "prompt": {
+            "text": "4.1F - # of Lost to Follow-up (LTFU) Tuberculosis (TB) Clients Traced"
+          }
+        },
+        "required": "data('highest_module') >= 4",
+        "_row_num": 64
+      },
+      {
+        "clause": "end screen",
+        "required": "data('highest_module') >= 4",
+        "_row_num": 65
+      },
+      {
+        "branch_label": "end",
+        "_row_num": 66
       },
       {
         "type": "note",
@@ -212,7 +645,7 @@
             "text": "eMSR completed. On the next screen, press “Finalize” to save your data. To review your monthly data, go to “CHA Monthly Service Reports” in “View Cases”."
           }
         },
-        "_row_num": 31
+        "_row_num": 67
       }
     ],
     "choices": [
@@ -338,23 +771,13 @@
       },
       {
         "choice_list_name": "years",
-        "data_value": 2018,
-        "display": {
-          "title": {
-            "text": "2018"
-          }
-        },
-        "_row_num": 14
-      },
-      {
-        "choice_list_name": "years",
         "data_value": 2019,
         "display": {
           "title": {
             "text": "2019"
           }
         },
-        "_row_num": 15
+        "_row_num": 14
       },
       {
         "choice_list_name": "years",
@@ -364,7 +787,7 @@
             "text": "2020"
           }
         },
-        "_row_num": 16
+        "_row_num": 15
       },
       {
         "choice_list_name": "years",
@@ -374,578 +797,47 @@
             "text": "2021"
           }
         },
-        "_row_num": 17
+        "_row_num": 16
       },
       {
         "choice_list_name": "modules",
-        "data_value": "module1",
+        "data_value": 1,
         "display": {
           "title": {
             "text": "Module 1 – Routine Visit"
           }
         },
-        "_row_num": 18
+        "_row_num": 17
       },
       {
         "choice_list_name": "modules",
-        "data_value": "module2",
+        "data_value": 2,
         "display": {
           "title": {
             "text": "Module 2 – RMNH"
           }
         },
-        "_row_num": 19
+        "_row_num": 18
       },
       {
         "choice_list_name": "modules",
-        "data_value": "module3",
+        "data_value": 3,
         "display": {
           "title": {
             "text": "Module 3 – iCCM"
           }
         },
-        "_row_num": 20
-      },
-      {
-        "choice_list_name": "modules",
-        "data_value": "module4",
-        "display": {
-          "title": {
-            "text": "Module 4 – HIV, TB, NTB, Mental Health"
-          }
-        },
-        "_row_num": 21
-      }
-    ],
-    "module1": [
-      {
-        "clause": "begin screen",
-        "_row_num": 2
-      },
-      {
-        "type": "integer",
-        "name": "household_visits",
-        "display": {
-          "prompt": {
-            "text": "1.2A - # of Routine Household Visits"
-          }
-        },
-        "required": 1,
-        "_row_num": 3
-      },
-      {
-        "type": "integer",
-        "name": "births_home",
-        "display": {
-          "prompt": {
-            "text": "1.2B - # of Births (community/home)"
-          }
-        },
-        "required": 1,
-        "_row_num": 4
-      },
-      {
-        "type": "integer",
-        "name": "births_facility",
-        "display": {
-          "prompt": {
-            "text": "1.2C - # of Births (facility)"
-          }
-        },
-        "required": 1,
-        "_row_num": 5
-      },
-      {
-        "type": "integer",
-        "name": "still_births",
-        "display": {
-          "prompt": {
-            "text": "1.2D - # of Still Births"
-          }
-        },
-        "required": 1,
-        "_row_num": 6
-      },
-      {
-        "clause": "end screen",
-        "_row_num": 7
-      },
-      {
-        "clause": "begin screen",
-        "_row_num": 8
-      },
-      {
-        "type": "integer",
-        "name": "neonatal_deaths",
-        "display": {
-          "prompt": {
-            "text": "1.2E - # of Neonatal Deaths"
-          }
-        },
-        "required": 1,
-        "_row_num": 9
-      },
-      {
-        "type": "integer",
-        "name": "post_neonatal_deaths",
-        "display": {
-          "prompt": {
-            "text": "1.2F - # of Post-neonatal Deaths"
-          }
-        },
-        "required": 1,
-        "_row_num": 10
-      },
-      {
-        "type": "integer",
-        "name": "child_deaths",
-        "display": {
-          "prompt": {
-            "text": "1.2G - # of Child Deaths"
-          }
-        },
-        "required": 1,
-        "_row_num": 11
-      },
-      {
-        "type": "integer",
-        "name": "maternal_deaths",
-        "display": {
-          "prompt": {
-            "text": "1.2H - # of Maternal Deaths"
-          }
-        },
-        "required": 1,
-        "_row_num": 12
-      },
-      {
-        "clause": "end screen",
-        "_row_num": 13
-      },
-      {
-        "clause": "begin screen",
-        "_row_num": 14
-      },
-      {
-        "type": "integer",
-        "name": "community_triggers",
-        "display": {
-          "prompt": {
-            "text": "1.2I - # of Community Triggers"
-          }
-        },
-        "required": 1,
-        "_row_num": 15
-      },
-      {
-        "type": "integer",
-        "name": "suspect_referrals",
-        "display": {
-          "prompt": {
-            "text": "1.2J - # of HIV, TB, Neglected Tropical Disease, Mental Health Suspect Referrals"
-          }
-        },
-        "required": 1,
-        "_row_num": 16
-      },
-      {
-        "type": "integer",
-        "name": "deaths_home",
-        "display": {
-          "prompt": {
-            "text": "1.2K - # of Deaths (over 5 years) in the community/home"
-          }
-        },
-        "required": 1,
-        "_row_num": 17
-      },
-      {
-        "clause": "end screen",
-        "_row_num": 18
-      }
-    ],
-    "module2": [
-      {
-        "clause": "begin screen",
-        "_row_num": 2
-      },
-      {
-        "type": "integer",
-        "name": "pregnant_visits",
-        "display": {
-          "prompt": {
-            "text": "2.1A - # of Pregnant Woman Visits"
-          }
-        },
-        "required": 1,
-        "_row_num": 3
-      },
-      {
-        "type": "integer",
-        "name": "clients_referred_delivery",
-        "display": {
-          "prompt": {
-            "text": "2.1B - # of Clients Referred For Delivery"
-          }
-        },
-        "required": 1,
-        "_row_num": 4
-      },
-      {
-        "type": "integer",
-        "name": "referred_anc_visit",
-        "display": {
-          "prompt": {
-            "text": "2.1C - # of Referred for ANC Visit"
-          }
-        },
-        "required": 1,
-        "_row_num": 5
-      },
-      {
-        "type": "integer",
-        "name": "post_natal_visits",
-        "display": {
-          "prompt": {
-            "text": "2.1D - # of Post Natal Visits"
-          }
-        },
-        "required": 1,
-        "_row_num": 6
-      },
-      {
-        "clause": "end screen",
-        "_row_num": 7
-      },
-      {
-        "clause": "begin screen",
-        "_row_num": 8
-      },
-      {
-        "type": "integer",
-        "name": "clients_referred_maternal_danger_sign",
-        "display": {
-          "prompt": {
-            "text": "2.1 E - # of Clients Referred for Woman & Newborn Danger Sign"
-          }
-        },
-        "required": 1,
-        "_row_num": 9
-      },
-      {
-        "type": "integer",
-        "name": "hbmnc_within_two_days_mother",
-        "display": {
-          "prompt": {
-            "text": "2.1F - # of HBMNC within 48 hours – Mother"
-          },
-          "hint": {
-            "text": "Number of mothers who received home based maternal and neonatal care (HBMNC) within two days after birth or after returning from the facility"
-          }
-        },
-        "required": 1,
-        "_row_num": 10
-      },
-      {
-        "type": "integer",
-        "name": "hbmnc_within_two_days_infant",
-        "display": {
-          "prompt": {
-            "text": "2.1G - # of HBMNC within 48 hours – Infant"
-          },
-          "hint": {
-            "text": "Number of newborns who received home based maternal and neonatal care (HBMNC) within two days after birth or after returning from the facility"
-          }
-        },
-        "required": 1,
-        "_row_num": 11
-      },
-      {
-        "type": "integer",
-        "name": "clients_using_family_planning",
-        "display": {
-          "prompt": {
-            "text": "2.2A - # of Clients Currently Using Modern Family Planning"
-          }
-        },
-        "required": 1,
-        "_row_num": 12
-      },
-      {
-        "clause": "end screen",
-        "_row_num": 13
-      }
-    ],
-    "module3": [
-      {
-        "clause": "begin screen",
-        "_row_num": 2
-      },
-      {
-        "type": "integer",
-        "name": "active_case_finds",
-        "display": {
-          "prompt": {
-            "text": "3.1A - # of Active Case Finds"
-          }
-        },
-        "required": 1,
-        "_row_num": 3
-      },
-      {
-        "type": "integer",
-        "name": "red_muac",
-        "display": {
-          "prompt": {
-            "text": "3.1B - # of Red MUAC (severe malnutrition)"
-          }
-        },
-        "required": 1,
-        "_row_num": 4
-      },
-      {
-        "type": "integer",
-        "name": "yellow_muac",
-        "display": {
-          "prompt": {
-            "text": "3.1C - # of Yellow MUAC (moderate malnutrition)"
-          }
-        },
-        "required": 1,
-        "_row_num": 5
-      },
-      {
-        "type": "integer",
-        "name": "green_muac",
-        "display": {
-          "prompt": {
-            "text": "3.1D - # of Green MUAC"
-          }
-        },
-        "required": 1,
-        "_row_num": 6
-      },
-      {
-        "clause": "end screen",
-        "_row_num": 7
-      },
-      {
-        "clause": "begin screen",
-        "_row_num": 8
-      },
-      {
-        "type": "integer",
-        "name": "pneumonia_cases_identified",
-        "display": {
-          "prompt": {
-            "text": "3.1E - # of Pneumonia Cases Identified"
-          }
-        },
-        "required": 1,
-        "_row_num": 9
-      },
-      {
-        "type": "integer",
-        "name": "malaria_cases_identified",
-        "display": {
-          "prompt": {
-            "text": "3.1F - # of Malaria Cases Identified (RDT positive)"
-          }
-        },
-        "required": 1,
-        "_row_num": 10
-      },
-      {
-        "type": "integer",
-        "name": "diarrhea_cases_identified",
-        "display": {
-          "prompt": {
-            "text": "3.1G - # of Diarrhea Cases Identified"
-          }
-        },
-        "required": 1,
-        "_row_num": 11
-      },
-      {
-        "type": "integer",
-        "name": "pneumonia_patients_treated",
-        "display": {
-          "prompt": {
-            "text": "3.1H - # of Pneumonia Patients Treated with Antibiotics"
-          }
-        },
-        "required": 1,
-        "_row_num": 12
-      },
-      {
-        "clause": "end screen",
-        "_row_num": 13
-      },
-      {
-        "clause": "begin screen",
-        "_row_num": 14
-      },
-      {
-        "type": "integer",
-        "name": "malaria_infants_treated",
-        "display": {
-          "prompt": {
-            "text": "3.1I - # of Malaria Patients Treated (2-11 months)"
-          }
-        },
-        "required": 1,
-        "_row_num": 15
-      },
-      {
-        "type": "integer",
-        "name": "malaria_children_treated",
-        "display": {
-          "prompt": {
-            "text": "3.1J - # of Malaria Patients Treated (1-5 years)"
-          }
-        },
-        "required": 1,
-        "_row_num": 16
-      },
-      {
-        "type": "integer",
-        "name": "malaria_patients_treated_under_day",
-        "display": {
-          "prompt": {
-            "text": "3.1K - # of Malaria Patients Treated in Less than 24 Hours"
-          }
-        },
-        "required": 1,
-        "_row_num": 17
-      },
-      {
-        "type": "integer",
-        "name": "malaria_patients_treated_over_day",
-        "display": {
-          "prompt": {
-            "text": "3.1L - # of Malaria Patients Treated in More than 24 Hours"
-          }
-        },
-        "required": 1,
-        "_row_num": 18
-      },
-      {
-        "clause": "end screen",
         "_row_num": 19
       },
       {
-        "clause": "begin screen",
+        "choice_list_name": "modules",
+        "data_value": 4,
+        "display": {
+          "title": {
+            "text": "Module 4 – HIV, TB, NTB"
+          }
+        },
         "_row_num": 20
-      },
-      {
-        "type": "integer",
-        "name": "diarrhea_patients_treated_zinc_ors",
-        "display": {
-          "prompt": {
-            "text": "3.1M - # of Diarrhea Patients Treated with Zinc & ORS"
-          }
-        },
-        "required": 1,
-        "_row_num": 21
-      },
-      {
-        "type": "integer",
-        "name": "iccem_patients_referred",
-        "display": {
-          "prompt": {
-            "text": "3.1N - # of iCCM Patients Referred to Health Facility"
-          }
-        },
-        "required": 1,
-        "_row_num": 22
-      },
-      {
-        "clause": "end screen",
-        "_row_num": 23
-      }
-    ],
-    "module4": [
-      {
-        "clause": "begin screen",
-        "_row_num": 2
-      },
-      {
-        "type": "integer",
-        "name": "hiv_client_visits",
-        "display": {
-          "prompt": {
-            "text": "4.1A - # of HIV Client Visits"
-          }
-        },
-        "required": 1,
-        "_row_num": 3
-      },
-      {
-        "type": "integer",
-        "name": "tb_client_visits",
-        "display": {
-          "prompt": {
-            "text": "4.1B - # of Tuberculosis (TB) Client Visits"
-          }
-        },
-        "required": 1,
-        "_row_num": 4
-      },
-      {
-        "type": "integer",
-        "name": "neglected_ntd_client_visits",
-        "display": {
-          "prompt": {
-            "text": "4.1C - # of Neglected Tropical Disease (NTD) Client Visits"
-          }
-        },
-        "required": 1,
-        "_row_num": 5
-      },
-      {
-        "type": "integer",
-        "name": "mental_health_client_visits",
-        "display": {
-          "prompt": {
-            "text": "4.1D - # of Mental Health Client Visits"
-          }
-        },
-        "required": 1,
-        "_row_num": 6
-      },
-      {
-        "clause": "end screen",
-        "_row_num": 7
-      },
-      {
-        "clause": "begin screen",
-        "_row_num": 8
-      },
-      {
-        "type": "integer",
-        "name": "ltfu_hiv_clients_traced",
-        "display": {
-          "prompt": {
-            "text": "4.1E - # of Lost to Follow-up (LTFU) HIV Clients Traced"
-          }
-        },
-        "required": 1,
-        "_row_num": 9
-      },
-      {
-        "type": "integer",
-        "name": "ltfu_tb_clients_traced",
-        "display": {
-          "prompt": {
-            "text": "4.1F - # of Lost to Follow-up (LTFU) Tuberculosis (TB) Clients Traced"
-          }
-        },
-        "required": 1,
-        "_row_num": 10
-      },
-      {
-        "clause": "end screen",
-        "_row_num": 11
       }
     ],
     "properties": [
@@ -995,7 +887,7 @@
         "setting_name": "survey",
         "display": {
           "title": {
-            "text": "CHA"
+            "text": "Monthly Report"
           }
         },
         "_row_num": 5
@@ -1023,38 +915,10 @@
         "setting_name": "survey",
         "display": {
           "title": {
-            "text": "CHA"
+            "text": "Monthly Report"
           }
         },
         "_row_num": 5
-      },
-      "module1": {
-        "display": {
-          "title": {
-            "text": "CHA"
-          }
-        }
-      },
-      "module2": {
-        "display": {
-          "title": {
-            "text": "CHA"
-          }
-        }
-      },
-      "module3": {
-        "display": {
-          "title": {
-            "text": "CHA"
-          }
-        }
-      },
-      "module4": {
-        "display": {
-          "title": {
-            "text": "CHA"
-          }
-        }
       }
     },
     "choices": {
@@ -1183,23 +1047,13 @@
       "years": [
         {
           "choice_list_name": "years",
-          "data_value": 2018,
-          "display": {
-            "title": {
-              "text": "2018"
-            }
-          },
-          "_row_num": 14
-        },
-        {
-          "choice_list_name": "years",
           "data_value": 2019,
           "display": {
             "title": {
               "text": "2019"
             }
           },
-          "_row_num": 15
+          "_row_num": 14
         },
         {
           "choice_list_name": "years",
@@ -1209,7 +1063,7 @@
               "text": "2020"
             }
           },
-          "_row_num": 16
+          "_row_num": 15
         },
         {
           "choice_list_name": "years",
@@ -1219,49 +1073,49 @@
               "text": "2021"
             }
           },
-          "_row_num": 17
+          "_row_num": 16
         }
       ],
       "modules": [
         {
           "choice_list_name": "modules",
-          "data_value": "module1",
+          "data_value": 1,
           "display": {
             "title": {
               "text": "Module 1 – Routine Visit"
+            }
+          },
+          "_row_num": 17
+        },
+        {
+          "choice_list_name": "modules",
+          "data_value": 2,
+          "display": {
+            "title": {
+              "text": "Module 2 – RMNH"
             }
           },
           "_row_num": 18
         },
         {
           "choice_list_name": "modules",
-          "data_value": "module2",
+          "data_value": 3,
           "display": {
             "title": {
-              "text": "Module 2 – RMNH"
+              "text": "Module 3 – iCCM"
             }
           },
           "_row_num": 19
         },
         {
           "choice_list_name": "modules",
-          "data_value": "module3",
+          "data_value": 4,
           "display": {
             "title": {
-              "text": "Module 3 – iCCM"
+              "text": "Module 4 – HIV, TB, NTB"
             }
           },
           "_row_num": 20
-        },
-        {
-          "choice_list_name": "modules",
-          "data_value": "module4",
-          "display": {
-            "title": {
-              "text": "Module 4 – HIV, TB, NTB, Mental Health"
-            }
-          },
-          "_row_num": 21
         }
       ]
     },
@@ -1344,11 +1198,22 @@
         "valuesList": "months",
         "elementKey": "reporting_month"
       },
+      "highest_module": {
+        "_defn": [
+          {
+            "_row_num": 13,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "valuesList": "modules",
+        "elementKey": "highest_module"
+      },
       "household_visits": {
         "_defn": [
           {
-            "_row_num": 3,
-            "section_name": "module1"
+            "_row_num": 17,
+            "section_name": "survey"
           }
         ],
         "type": "integer",
@@ -1357,8 +1222,8 @@
       "births_home": {
         "_defn": [
           {
-            "_row_num": 4,
-            "section_name": "module1"
+            "_row_num": 18,
+            "section_name": "survey"
           }
         ],
         "type": "integer",
@@ -1367,8 +1232,8 @@
       "births_facility": {
         "_defn": [
           {
-            "_row_num": 5,
-            "section_name": "module1"
+            "_row_num": 19,
+            "section_name": "survey"
           }
         ],
         "type": "integer",
@@ -1377,8 +1242,8 @@
       "still_births": {
         "_defn": [
           {
-            "_row_num": 6,
-            "section_name": "module1"
+            "_row_num": 20,
+            "section_name": "survey"
           }
         ],
         "type": "integer",
@@ -1387,8 +1252,8 @@
       "neonatal_deaths": {
         "_defn": [
           {
-            "_row_num": 9,
-            "section_name": "module1"
+            "_row_num": 21,
+            "section_name": "survey"
           }
         ],
         "type": "integer",
@@ -1397,8 +1262,8 @@
       "post_neonatal_deaths": {
         "_defn": [
           {
-            "_row_num": 10,
-            "section_name": "module1"
+            "_row_num": 22,
+            "section_name": "survey"
           }
         ],
         "type": "integer",
@@ -1407,8 +1272,8 @@
       "child_deaths": {
         "_defn": [
           {
-            "_row_num": 11,
-            "section_name": "module1"
+            "_row_num": 23,
+            "section_name": "survey"
           }
         ],
         "type": "integer",
@@ -1417,8 +1282,8 @@
       "maternal_deaths": {
         "_defn": [
           {
-            "_row_num": 12,
-            "section_name": "module1"
+            "_row_num": 24,
+            "section_name": "survey"
           }
         ],
         "type": "integer",
@@ -1427,8 +1292,8 @@
       "community_triggers": {
         "_defn": [
           {
-            "_row_num": 15,
-            "section_name": "module1"
+            "_row_num": 25,
+            "section_name": "survey"
           }
         ],
         "type": "integer",
@@ -1437,8 +1302,8 @@
       "suspect_referrals": {
         "_defn": [
           {
-            "_row_num": 16,
-            "section_name": "module1"
+            "_row_num": 26,
+            "section_name": "survey"
           }
         ],
         "type": "integer",
@@ -1447,8 +1312,8 @@
       "deaths_home": {
         "_defn": [
           {
-            "_row_num": 17,
-            "section_name": "module1"
+            "_row_num": 27,
+            "section_name": "survey"
           }
         ],
         "type": "integer",
@@ -1457,8 +1322,8 @@
       "pregnant_visits": {
         "_defn": [
           {
-            "_row_num": 3,
-            "section_name": "module2"
+            "_row_num": 31,
+            "section_name": "survey"
           }
         ],
         "type": "integer",
@@ -1467,8 +1332,8 @@
       "clients_referred_delivery": {
         "_defn": [
           {
-            "_row_num": 4,
-            "section_name": "module2"
+            "_row_num": 32,
+            "section_name": "survey"
           }
         ],
         "type": "integer",
@@ -1477,8 +1342,8 @@
       "referred_anc_visit": {
         "_defn": [
           {
-            "_row_num": 5,
-            "section_name": "module2"
+            "_row_num": 33,
+            "section_name": "survey"
           }
         ],
         "type": "integer",
@@ -1487,8 +1352,8 @@
       "post_natal_visits": {
         "_defn": [
           {
-            "_row_num": 6,
-            "section_name": "module2"
+            "_row_num": 34,
+            "section_name": "survey"
           }
         ],
         "type": "integer",
@@ -1497,8 +1362,8 @@
       "clients_referred_maternal_danger_sign": {
         "_defn": [
           {
-            "_row_num": 9,
-            "section_name": "module2"
+            "_row_num": 35,
+            "section_name": "survey"
           }
         ],
         "type": "integer",
@@ -1507,8 +1372,8 @@
       "hbmnc_within_two_days_mother": {
         "_defn": [
           {
-            "_row_num": 10,
-            "section_name": "module2"
+            "_row_num": 36,
+            "section_name": "survey"
           }
         ],
         "type": "integer",
@@ -1517,8 +1382,8 @@
       "hbmnc_within_two_days_infant": {
         "_defn": [
           {
-            "_row_num": 11,
-            "section_name": "module2"
+            "_row_num": 37,
+            "section_name": "survey"
           }
         ],
         "type": "integer",
@@ -1527,8 +1392,8 @@
       "clients_using_family_planning": {
         "_defn": [
           {
-            "_row_num": 12,
-            "section_name": "module2"
+            "_row_num": 38,
+            "section_name": "survey"
           }
         ],
         "type": "integer",
@@ -1537,8 +1402,8 @@
       "active_case_finds": {
         "_defn": [
           {
-            "_row_num": 3,
-            "section_name": "module3"
+            "_row_num": 42,
+            "section_name": "survey"
           }
         ],
         "type": "integer",
@@ -1547,8 +1412,8 @@
       "red_muac": {
         "_defn": [
           {
-            "_row_num": 4,
-            "section_name": "module3"
+            "_row_num": 43,
+            "section_name": "survey"
           }
         ],
         "type": "integer",
@@ -1557,8 +1422,8 @@
       "yellow_muac": {
         "_defn": [
           {
-            "_row_num": 5,
-            "section_name": "module3"
+            "_row_num": 44,
+            "section_name": "survey"
           }
         ],
         "type": "integer",
@@ -1567,8 +1432,8 @@
       "green_muac": {
         "_defn": [
           {
-            "_row_num": 6,
-            "section_name": "module3"
+            "_row_num": 45,
+            "section_name": "survey"
           }
         ],
         "type": "integer",
@@ -1577,8 +1442,8 @@
       "pneumonia_cases_identified": {
         "_defn": [
           {
-            "_row_num": 9,
-            "section_name": "module3"
+            "_row_num": 46,
+            "section_name": "survey"
           }
         ],
         "type": "integer",
@@ -1587,8 +1452,8 @@
       "malaria_cases_identified": {
         "_defn": [
           {
-            "_row_num": 10,
-            "section_name": "module3"
+            "_row_num": 47,
+            "section_name": "survey"
           }
         ],
         "type": "integer",
@@ -1597,8 +1462,8 @@
       "diarrhea_cases_identified": {
         "_defn": [
           {
-            "_row_num": 11,
-            "section_name": "module3"
+            "_row_num": 48,
+            "section_name": "survey"
           }
         ],
         "type": "integer",
@@ -1607,8 +1472,8 @@
       "pneumonia_patients_treated": {
         "_defn": [
           {
-            "_row_num": 12,
-            "section_name": "module3"
+            "_row_num": 49,
+            "section_name": "survey"
           }
         ],
         "type": "integer",
@@ -1617,8 +1482,8 @@
       "malaria_infants_treated": {
         "_defn": [
           {
-            "_row_num": 15,
-            "section_name": "module3"
+            "_row_num": 50,
+            "section_name": "survey"
           }
         ],
         "type": "integer",
@@ -1627,8 +1492,8 @@
       "malaria_children_treated": {
         "_defn": [
           {
-            "_row_num": 16,
-            "section_name": "module3"
+            "_row_num": 51,
+            "section_name": "survey"
           }
         ],
         "type": "integer",
@@ -1637,8 +1502,8 @@
       "malaria_patients_treated_under_day": {
         "_defn": [
           {
-            "_row_num": 17,
-            "section_name": "module3"
+            "_row_num": 52,
+            "section_name": "survey"
           }
         ],
         "type": "integer",
@@ -1647,8 +1512,8 @@
       "malaria_patients_treated_over_day": {
         "_defn": [
           {
-            "_row_num": 18,
-            "section_name": "module3"
+            "_row_num": 53,
+            "section_name": "survey"
           }
         ],
         "type": "integer",
@@ -1657,8 +1522,8 @@
       "diarrhea_patients_treated_zinc_ors": {
         "_defn": [
           {
-            "_row_num": 21,
-            "section_name": "module3"
+            "_row_num": 54,
+            "section_name": "survey"
           }
         ],
         "type": "integer",
@@ -1667,8 +1532,8 @@
       "iccem_patients_referred": {
         "_defn": [
           {
-            "_row_num": 22,
-            "section_name": "module3"
+            "_row_num": 55,
+            "section_name": "survey"
           }
         ],
         "type": "integer",
@@ -1677,8 +1542,8 @@
       "hiv_client_visits": {
         "_defn": [
           {
-            "_row_num": 3,
-            "section_name": "module4"
+            "_row_num": 59,
+            "section_name": "survey"
           }
         ],
         "type": "integer",
@@ -1687,8 +1552,8 @@
       "tb_client_visits": {
         "_defn": [
           {
-            "_row_num": 4,
-            "section_name": "module4"
+            "_row_num": 60,
+            "section_name": "survey"
           }
         ],
         "type": "integer",
@@ -1697,8 +1562,8 @@
       "neglected_ntd_client_visits": {
         "_defn": [
           {
-            "_row_num": 5,
-            "section_name": "module4"
+            "_row_num": 61,
+            "section_name": "survey"
           }
         ],
         "type": "integer",
@@ -1707,8 +1572,8 @@
       "mental_health_client_visits": {
         "_defn": [
           {
-            "_row_num": 6,
-            "section_name": "module4"
+            "_row_num": 62,
+            "section_name": "survey"
           }
         ],
         "type": "integer",
@@ -1717,8 +1582,8 @@
       "ltfu_hiv_clients_traced": {
         "_defn": [
           {
-            "_row_num": 9,
-            "section_name": "module4"
+            "_row_num": 63,
+            "section_name": "survey"
           }
         ],
         "type": "integer",
@@ -1727,8 +1592,8 @@
       "ltfu_tb_clients_traced": {
         "_defn": [
           {
-            "_row_num": 10,
-            "section_name": "module4"
+            "_row_num": 64,
+            "section_name": "survey"
           }
         ],
         "type": "integer",
@@ -1737,27 +1602,13 @@
     },
     "section_names": [
       "initial",
-      "module1",
-      "module2",
-      "module3",
-      "module4",
       "survey"
     ],
     "sections": {
       "survey": {
         "section_name": "survey",
-        "nested_sections": {
-          "module1": true,
-          "module2": true,
-          "module3": true,
-          "module4": true
-        },
-        "reachable_sections": {
-          "module1": true,
-          "module2": true,
-          "module3": true,
-          "module4": true
-        },
+        "nested_sections": {},
+        "reachable_sections": {},
         "prompts": [
           {
             "type": "note",
@@ -1794,7 +1645,7 @@
             "name": "chss_id",
             "display": {
               "prompt": {
-                "text": "CHSS ID:"
+                "text": "Your Supervisor (CHSS) ID:"
               }
             },
             "required": 1,
@@ -1810,7 +1661,7 @@
             "name": "chss_name",
             "display": {
               "prompt": {
-                "text": "Your (CHSS) name:"
+                "text": "Your Supervisor (CHSS) Name:"
               }
             },
             "required": 1,
@@ -1826,7 +1677,7 @@
             "name": "supervised_cha_id",
             "display": {
               "prompt": {
-                "text": "Supervised CHA ID:"
+                "text": "Your (CHA) ID:"
               }
             },
             "required": 1,
@@ -1842,7 +1693,7 @@
             "name": "supervised_cha_name",
             "display": {
               "prompt": {
-                "text": "Supervised CHA Name:"
+                "text": "Your (CHA) Name:"
               }
             },
             "required": 1,
@@ -1891,80 +1742,651 @@
             "promptIdx": 7
           },
           {
-            "type": "user_branch",
-            "name": "module",
+            "type": "select_one",
+            "name": "highest_module",
             "display": {
               "prompt": {
-                "text": "Fill each NCHAP Module that CHA has completed"
+                "text": "Highest CHA Program Module that CHA has completed"
               }
             },
+            "required": 1,
             "values_list": "modules",
-            "_row_num": 16,
-            "__rowNum__": 15,
+            "_row_num": 13,
+            "__rowNum__": 12,
             "_token_type": "prompt",
-            "_type": "user_branch",
-            "_branch_label_enclosing_screen": "survey/_screen16",
+            "_type": "select_one",
+            "_branch_label_enclosing_screen": "survey/_screen10",
             "promptIdx": 8
           },
           {
-            "clause": "do section module1",
+            "type": "integer",
+            "name": "household_visits",
+            "display": {
+              "prompt": {
+                "text": "1.2A - # of Routine Household Visits"
+              }
+            },
+            "required": "data('highest_module') >= 1",
+            "_row_num": 17,
+            "__rowNum__": 16,
+            "_token_type": "prompt",
+            "_type": "integer",
+            "_branch_label_enclosing_screen": "survey/_screen16",
+            "promptIdx": 9
+          },
+          {
+            "type": "integer",
+            "name": "births_home",
+            "display": {
+              "prompt": {
+                "text": "1.2B - # of Births (community/home)"
+              }
+            },
+            "required": "data('highest_module') >= 1",
+            "_row_num": 18,
+            "__rowNum__": 17,
+            "_token_type": "prompt",
+            "_type": "integer",
+            "_branch_label_enclosing_screen": "survey/_screen16",
+            "promptIdx": 10
+          },
+          {
+            "type": "integer",
+            "name": "births_facility",
+            "display": {
+              "prompt": {
+                "text": "1.2C - # of Births (facility)"
+              }
+            },
+            "required": "data('highest_module') >= 1",
             "_row_num": 19,
             "__rowNum__": 18,
             "_token_type": "prompt",
-            "_do_section_name": "module1",
-            "_type": "_section",
-            "promptIdx": 9,
-            "display": {
-              "title": {
-                "text": "CHA"
-              }
-            },
-            "_branch_label_enclosing_screen": "module1/0"
+            "_type": "integer",
+            "_branch_label_enclosing_screen": "survey/_screen16",
+            "promptIdx": 11
           },
           {
-            "clause": "do section module2",
+            "type": "integer",
+            "name": "still_births",
+            "display": {
+              "prompt": {
+                "text": "1.2D - # of Still Births"
+              }
+            },
+            "required": "data('highest_module') >= 1",
+            "_row_num": 20,
+            "__rowNum__": 19,
+            "_token_type": "prompt",
+            "_type": "integer",
+            "_branch_label_enclosing_screen": "survey/_screen16",
+            "promptIdx": 12
+          },
+          {
+            "type": "integer",
+            "name": "neonatal_deaths",
+            "display": {
+              "prompt": {
+                "text": "1.2E - # of Neonatal Deaths"
+              }
+            },
+            "required": "data('highest_module') >= 1",
+            "_row_num": 21,
+            "__rowNum__": 20,
+            "_token_type": "prompt",
+            "_type": "integer",
+            "_branch_label_enclosing_screen": "survey/_screen16",
+            "promptIdx": 13
+          },
+          {
+            "type": "integer",
+            "name": "post_neonatal_deaths",
+            "display": {
+              "prompt": {
+                "text": "1.2F - # of Post-neonatal Deaths"
+              }
+            },
+            "required": "data('highest_module') >= 1",
             "_row_num": 22,
             "__rowNum__": 21,
             "_token_type": "prompt",
-            "_do_section_name": "module2",
-            "_type": "_section",
-            "promptIdx": 10,
-            "display": {
-              "title": {
-                "text": "CHA"
-              }
-            },
-            "_branch_label_enclosing_screen": "module2/0"
+            "_type": "integer",
+            "_branch_label_enclosing_screen": "survey/_screen16",
+            "promptIdx": 14
           },
           {
-            "clause": "do section module3",
+            "type": "integer",
+            "name": "child_deaths",
+            "display": {
+              "prompt": {
+                "text": "1.2G - # of Child Deaths"
+              }
+            },
+            "required": "data('highest_module') >= 1",
+            "_row_num": 23,
+            "__rowNum__": 22,
+            "_token_type": "prompt",
+            "_type": "integer",
+            "_branch_label_enclosing_screen": "survey/_screen16",
+            "promptIdx": 15
+          },
+          {
+            "type": "integer",
+            "name": "maternal_deaths",
+            "display": {
+              "prompt": {
+                "text": "1.2H - # of Maternal Deaths"
+              }
+            },
+            "required": "data('highest_module') >= 1",
+            "_row_num": 24,
+            "__rowNum__": 23,
+            "_token_type": "prompt",
+            "_type": "integer",
+            "_branch_label_enclosing_screen": "survey/_screen16",
+            "promptIdx": 16
+          },
+          {
+            "type": "integer",
+            "name": "community_triggers",
+            "display": {
+              "prompt": {
+                "text": "1.2I - # of Community Triggers"
+              }
+            },
+            "required": "data('highest_module') >= 1",
             "_row_num": 25,
             "__rowNum__": 24,
             "_token_type": "prompt",
-            "_do_section_name": "module3",
-            "_type": "_section",
-            "promptIdx": 11,
-            "display": {
-              "title": {
-                "text": "CHA"
-              }
-            },
-            "_branch_label_enclosing_screen": "module3/0"
+            "_type": "integer",
+            "_branch_label_enclosing_screen": "survey/_screen16",
+            "promptIdx": 17
           },
           {
-            "clause": "do section module4",
-            "_row_num": 28,
-            "__rowNum__": 27,
-            "_token_type": "prompt",
-            "_do_section_name": "module4",
-            "_type": "_section",
-            "promptIdx": 12,
+            "type": "integer",
+            "name": "suspect_referrals",
             "display": {
-              "title": {
-                "text": "CHA"
+              "prompt": {
+                "text": "1.2J - # of HIV, TB, Neglected Tropical Disease, Mental Health Suspect Referrals"
               }
             },
-            "_branch_label_enclosing_screen": "module4/0"
+            "required": "data('highest_module') >= 1",
+            "_row_num": 26,
+            "__rowNum__": 25,
+            "_token_type": "prompt",
+            "_type": "integer",
+            "_branch_label_enclosing_screen": "survey/_screen16",
+            "promptIdx": 18
+          },
+          {
+            "type": "integer",
+            "name": "deaths_home",
+            "display": {
+              "prompt": {
+                "text": "1.2K - # of Deaths (over 5 years) in the community/home"
+              }
+            },
+            "required": "data('highest_module') >= 1",
+            "_row_num": 27,
+            "__rowNum__": 26,
+            "_token_type": "prompt",
+            "_type": "integer",
+            "_branch_label_enclosing_screen": "survey/_screen16",
+            "promptIdx": 19
+          },
+          {
+            "type": "integer",
+            "name": "pregnant_visits",
+            "display": {
+              "prompt": {
+                "text": "2.1A - # of Pregnant Woman Visits"
+              }
+            },
+            "required": "data('highest_module') >= 2",
+            "_row_num": 31,
+            "__rowNum__": 30,
+            "_token_type": "prompt",
+            "_type": "integer",
+            "_branch_label_enclosing_screen": "survey/_screen30",
+            "promptIdx": 20
+          },
+          {
+            "type": "integer",
+            "name": "clients_referred_delivery",
+            "display": {
+              "prompt": {
+                "text": "2.1B - # of Clients Referred For Delivery"
+              }
+            },
+            "required": "data('highest_module') >= 2",
+            "_row_num": 32,
+            "__rowNum__": 31,
+            "_token_type": "prompt",
+            "_type": "integer",
+            "_branch_label_enclosing_screen": "survey/_screen30",
+            "promptIdx": 21
+          },
+          {
+            "type": "integer",
+            "name": "referred_anc_visit",
+            "display": {
+              "prompt": {
+                "text": "2.1C - # of Referred for ANC Visit"
+              }
+            },
+            "required": "data('highest_module') >= 2",
+            "_row_num": 33,
+            "__rowNum__": 32,
+            "_token_type": "prompt",
+            "_type": "integer",
+            "_branch_label_enclosing_screen": "survey/_screen30",
+            "promptIdx": 22
+          },
+          {
+            "type": "integer",
+            "name": "post_natal_visits",
+            "display": {
+              "prompt": {
+                "text": "2.1D - # of Post Natal Visits"
+              }
+            },
+            "required": "data('highest_module') >= 2",
+            "_row_num": 34,
+            "__rowNum__": 33,
+            "_token_type": "prompt",
+            "_type": "integer",
+            "_branch_label_enclosing_screen": "survey/_screen30",
+            "promptIdx": 23
+          },
+          {
+            "type": "integer",
+            "name": "clients_referred_maternal_danger_sign",
+            "display": {
+              "prompt": {
+                "text": "2.1 E - # of Clients Referred for Woman & Newborn Danger Sign"
+              }
+            },
+            "required": "data('highest_module') >= 2",
+            "_row_num": 35,
+            "__rowNum__": 34,
+            "_token_type": "prompt",
+            "_type": "integer",
+            "_branch_label_enclosing_screen": "survey/_screen30",
+            "promptIdx": 24
+          },
+          {
+            "type": "integer",
+            "name": "hbmnc_within_two_days_mother",
+            "display": {
+              "prompt": {
+                "text": "2.1F - # of HBMNC within 48 hours – Mother"
+              },
+              "hint": {
+                "text": "Number of mothers who received home based maternal and neonatal care (HBMNC) within two days after birth or after returning from the facility"
+              }
+            },
+            "required": "data('highest_module') >= 2",
+            "_row_num": 36,
+            "__rowNum__": 35,
+            "_token_type": "prompt",
+            "_type": "integer",
+            "_branch_label_enclosing_screen": "survey/_screen30",
+            "promptIdx": 25
+          },
+          {
+            "type": "integer",
+            "name": "hbmnc_within_two_days_infant",
+            "display": {
+              "prompt": {
+                "text": "2.1G - # of HBMNC within 48 hours – Infant"
+              },
+              "hint": {
+                "text": "Number of newborns who received home based maternal and neonatal care (HBMNC) within two days after birth or after returning from the facility"
+              }
+            },
+            "required": "data('highest_module') >= 2",
+            "_row_num": 37,
+            "__rowNum__": 36,
+            "_token_type": "prompt",
+            "_type": "integer",
+            "_branch_label_enclosing_screen": "survey/_screen30",
+            "promptIdx": 26
+          },
+          {
+            "type": "integer",
+            "name": "clients_using_family_planning",
+            "display": {
+              "prompt": {
+                "text": "2.2A - # of Clients Currently Using Modern Family Planning"
+              }
+            },
+            "required": "data('highest_module') >= 2",
+            "_row_num": 38,
+            "__rowNum__": 37,
+            "_token_type": "prompt",
+            "_type": "integer",
+            "_branch_label_enclosing_screen": "survey/_screen30",
+            "promptIdx": 27
+          },
+          {
+            "type": "integer",
+            "name": "active_case_finds",
+            "display": {
+              "prompt": {
+                "text": "3.1A - # of Active Case Finds"
+              }
+            },
+            "required": "data('highest_module') >= 3",
+            "_row_num": 42,
+            "__rowNum__": 41,
+            "_token_type": "prompt",
+            "_type": "integer",
+            "_branch_label_enclosing_screen": "survey/_screen41",
+            "promptIdx": 28
+          },
+          {
+            "type": "integer",
+            "name": "red_muac",
+            "display": {
+              "prompt": {
+                "text": "3.1B - # of Red MUAC (severe malnutrition)"
+              }
+            },
+            "required": "data('highest_module') >= 3",
+            "_row_num": 43,
+            "__rowNum__": 42,
+            "_token_type": "prompt",
+            "_type": "integer",
+            "_branch_label_enclosing_screen": "survey/_screen41",
+            "promptIdx": 29
+          },
+          {
+            "type": "integer",
+            "name": "yellow_muac",
+            "display": {
+              "prompt": {
+                "text": "3.1C - # of Yellow MUAC (moderate malnutrition)"
+              }
+            },
+            "required": "data('highest_module') >= 3",
+            "_row_num": 44,
+            "__rowNum__": 43,
+            "_token_type": "prompt",
+            "_type": "integer",
+            "_branch_label_enclosing_screen": "survey/_screen41",
+            "promptIdx": 30
+          },
+          {
+            "type": "integer",
+            "name": "green_muac",
+            "display": {
+              "prompt": {
+                "text": "3.1D - # of Green MUAC"
+              }
+            },
+            "required": "data('highest_module') >= 3",
+            "_row_num": 45,
+            "__rowNum__": 44,
+            "_token_type": "prompt",
+            "_type": "integer",
+            "_branch_label_enclosing_screen": "survey/_screen41",
+            "promptIdx": 31
+          },
+          {
+            "type": "integer",
+            "name": "pneumonia_cases_identified",
+            "display": {
+              "prompt": {
+                "text": "3.1E - # of Pneumonia Cases Identified"
+              }
+            },
+            "required": "data('highest_module') >= 3",
+            "_row_num": 46,
+            "__rowNum__": 45,
+            "_token_type": "prompt",
+            "_type": "integer",
+            "_branch_label_enclosing_screen": "survey/_screen41",
+            "promptIdx": 32
+          },
+          {
+            "type": "integer",
+            "name": "malaria_cases_identified",
+            "display": {
+              "prompt": {
+                "text": "3.1F - # of Malaria Cases Identified (RDT positive)"
+              }
+            },
+            "required": "data('highest_module') >= 3",
+            "_row_num": 47,
+            "__rowNum__": 46,
+            "_token_type": "prompt",
+            "_type": "integer",
+            "_branch_label_enclosing_screen": "survey/_screen41",
+            "promptIdx": 33
+          },
+          {
+            "type": "integer",
+            "name": "diarrhea_cases_identified",
+            "display": {
+              "prompt": {
+                "text": "3.1G - # of Diarrhea Cases Identified"
+              }
+            },
+            "required": "data('highest_module') >= 3",
+            "_row_num": 48,
+            "__rowNum__": 47,
+            "_token_type": "prompt",
+            "_type": "integer",
+            "_branch_label_enclosing_screen": "survey/_screen41",
+            "promptIdx": 34
+          },
+          {
+            "type": "integer",
+            "name": "pneumonia_patients_treated",
+            "display": {
+              "prompt": {
+                "text": "3.1H - # of Pneumonia Patients Treated with Antibiotics"
+              }
+            },
+            "required": "data('highest_module') >= 3",
+            "_row_num": 49,
+            "__rowNum__": 48,
+            "_token_type": "prompt",
+            "_type": "integer",
+            "_branch_label_enclosing_screen": "survey/_screen41",
+            "promptIdx": 35
+          },
+          {
+            "type": "integer",
+            "name": "malaria_infants_treated",
+            "display": {
+              "prompt": {
+                "text": "3.1I - # of Malaria Patients Treated (2-11 months)"
+              }
+            },
+            "required": "data('highest_module') >= 3",
+            "_row_num": 50,
+            "__rowNum__": 49,
+            "_token_type": "prompt",
+            "_type": "integer",
+            "_branch_label_enclosing_screen": "survey/_screen41",
+            "promptIdx": 36
+          },
+          {
+            "type": "integer",
+            "name": "malaria_children_treated",
+            "display": {
+              "prompt": {
+                "text": "3.1J - # of Malaria Patients Treated (1-5 years)"
+              }
+            },
+            "required": "data('highest_module') >= 3",
+            "_row_num": 51,
+            "__rowNum__": 50,
+            "_token_type": "prompt",
+            "_type": "integer",
+            "_branch_label_enclosing_screen": "survey/_screen41",
+            "promptIdx": 37
+          },
+          {
+            "type": "integer",
+            "name": "malaria_patients_treated_under_day",
+            "display": {
+              "prompt": {
+                "text": "3.1K - # of Malaria Patients Treated in Less than 24 Hours"
+              }
+            },
+            "required": "data('highest_module') >= 3",
+            "_row_num": 52,
+            "__rowNum__": 51,
+            "_token_type": "prompt",
+            "_type": "integer",
+            "_branch_label_enclosing_screen": "survey/_screen41",
+            "promptIdx": 38
+          },
+          {
+            "type": "integer",
+            "name": "malaria_patients_treated_over_day",
+            "display": {
+              "prompt": {
+                "text": "3.1L - # of Malaria Patients Treated in More than 24 Hours"
+              }
+            },
+            "required": "data('highest_module') >= 3",
+            "_row_num": 53,
+            "__rowNum__": 52,
+            "_token_type": "prompt",
+            "_type": "integer",
+            "_branch_label_enclosing_screen": "survey/_screen41",
+            "promptIdx": 39
+          },
+          {
+            "type": "integer",
+            "name": "diarrhea_patients_treated_zinc_ors",
+            "display": {
+              "prompt": {
+                "text": "3.1M - # of Diarrhea Patients Treated with Zinc & ORS"
+              }
+            },
+            "required": "data('highest_module') >= 3",
+            "_row_num": 54,
+            "__rowNum__": 53,
+            "_token_type": "prompt",
+            "_type": "integer",
+            "_branch_label_enclosing_screen": "survey/_screen41",
+            "promptIdx": 40
+          },
+          {
+            "type": "integer",
+            "name": "iccem_patients_referred",
+            "display": {
+              "prompt": {
+                "text": "3.1N - # of iCCM Patients Referred to Health Facility"
+              }
+            },
+            "required": "data('highest_module') >= 3",
+            "_row_num": 55,
+            "__rowNum__": 54,
+            "_token_type": "prompt",
+            "_type": "integer",
+            "_branch_label_enclosing_screen": "survey/_screen41",
+            "promptIdx": 41
+          },
+          {
+            "type": "integer",
+            "name": "hiv_client_visits",
+            "display": {
+              "prompt": {
+                "text": "4.1A - # of HIV Client Visits"
+              }
+            },
+            "required": "data('highest_module') >= 4",
+            "_row_num": 59,
+            "__rowNum__": 58,
+            "_token_type": "prompt",
+            "_type": "integer",
+            "_branch_label_enclosing_screen": "survey/_screen58",
+            "promptIdx": 42
+          },
+          {
+            "type": "integer",
+            "name": "tb_client_visits",
+            "display": {
+              "prompt": {
+                "text": "4.1B - # of Tuberculosis (TB) Client Visits"
+              }
+            },
+            "required": "data('highest_module') >= 4",
+            "_row_num": 60,
+            "__rowNum__": 59,
+            "_token_type": "prompt",
+            "_type": "integer",
+            "_branch_label_enclosing_screen": "survey/_screen58",
+            "promptIdx": 43
+          },
+          {
+            "type": "integer",
+            "name": "neglected_ntd_client_visits",
+            "display": {
+              "prompt": {
+                "text": "4.1C - # of Neglected Tropical Disease (NTD) Client Visits"
+              }
+            },
+            "required": "data('highest_module') >= 4",
+            "_row_num": 61,
+            "__rowNum__": 60,
+            "_token_type": "prompt",
+            "_type": "integer",
+            "_branch_label_enclosing_screen": "survey/_screen58",
+            "promptIdx": 44
+          },
+          {
+            "type": "integer",
+            "name": "mental_health_client_visits",
+            "display": {
+              "prompt": {
+                "text": "4.1D - # of Mental Health Client Visits"
+              }
+            },
+            "required": "data('highest_module') >= 4",
+            "_row_num": 62,
+            "__rowNum__": 61,
+            "_token_type": "prompt",
+            "_type": "integer",
+            "_branch_label_enclosing_screen": "survey/_screen58",
+            "promptIdx": 45
+          },
+          {
+            "type": "integer",
+            "name": "ltfu_hiv_clients_traced",
+            "display": {
+              "prompt": {
+                "text": "4.1E - # of Lost to Follow-up (LTFU) HIV Clients Traced"
+              }
+            },
+            "required": "data('highest_module') >= 4",
+            "_row_num": 63,
+            "__rowNum__": 62,
+            "_token_type": "prompt",
+            "_type": "integer",
+            "_branch_label_enclosing_screen": "survey/_screen58",
+            "promptIdx": 46
+          },
+          {
+            "type": "integer",
+            "name": "ltfu_tb_clients_traced",
+            "display": {
+              "prompt": {
+                "text": "4.1F - # of Lost to Follow-up (LTFU) Tuberculosis (TB) Clients Traced"
+              }
+            },
+            "required": "data('highest_module') >= 4",
+            "_row_num": 64,
+            "__rowNum__": 63,
+            "_token_type": "prompt",
+            "_type": "integer",
+            "_branch_label_enclosing_screen": "survey/_screen58",
+            "promptIdx": 47
           },
           {
             "type": "note",
@@ -1973,20 +2395,20 @@
                 "text": "eMSR completed. On the next screen, press “Finalize” to save your data. To review your monthly data, go to “CHA Monthly Service Reports” in “View Cases”."
               }
             },
-            "_row_num": 31,
-            "__rowNum__": 30,
+            "_row_num": 67,
+            "__rowNum__": 66,
             "_token_type": "prompt",
             "_type": "note",
-            "_branch_label_enclosing_screen": "survey/_screen31",
-            "promptIdx": 13
+            "_branch_label_enclosing_screen": "survey/_screen67",
+            "promptIdx": 48
           },
           {
             "_token_type": "prompt",
             "type": "contents",
             "_type": "contents",
-            "_row_num": 32,
-            "_branch_label_enclosing_screen": "survey/_screen32",
-            "promptIdx": 14
+            "_row_num": 68,
+            "_branch_label_enclosing_screen": "survey/_screen68",
+            "promptIdx": 49
           }
         ],
         "validation_tag_map": {
@@ -1997,7 +2419,47 @@
             4,
             5,
             6,
-            7
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22,
+            23,
+            24,
+            25,
+            26,
+            27,
+            28,
+            29,
+            30,
+            31,
+            32,
+            33,
+            34,
+            35,
+            36,
+            37,
+            38,
+            39,
+            40,
+            41,
+            42,
+            43,
+            44,
+            45,
+            46,
+            47
           ]
         },
         "operations": [
@@ -2028,1151 +2490,146 @@
             "_token_type": "begin_screen",
             "_end_screen_clause": {
               "clause": "end screen",
-              "_row_num": 13,
-              "__rowNum__": 12,
+              "_row_num": 14,
+              "__rowNum__": 13,
               "_token_type": "end_screen"
             },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(6);\nactivePromptIndicies.push(7);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(6);\nactivePromptIndicies.push(7);\nactivePromptIndicies.push(8);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 2
           },
           {
-            "_row_num": 16,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(8);\n\nreturn activePromptIndicies;\n}\n",
+            "clause": "goto end",
+            "condition": "data('highest_module') < 1",
+            "_row_num": 15,
+            "__rowNum__": 14,
+            "_token_type": "goto_label",
+            "_branch_label": "end",
             "operationIdx": 3
           },
           {
-            "clause": "goto end",
-            "_row_num": 17,
-            "__rowNum__": 16,
-            "_token_type": "goto_label",
-            "_branch_label": "end",
+            "clause": "begin screen",
+            "_row_num": 16,
+            "__rowNum__": 15,
+            "_token_type": "begin_screen",
+            "_end_screen_clause": {
+              "clause": "end screen",
+              "_row_num": 28,
+              "__rowNum__": 27,
+              "_token_type": "end_screen"
+            },
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(9);\nactivePromptIndicies.push(10);\nactivePromptIndicies.push(11);\nactivePromptIndicies.push(12);\nactivePromptIndicies.push(13);\nactivePromptIndicies.push(14);\nactivePromptIndicies.push(15);\nactivePromptIndicies.push(16);\nactivePromptIndicies.push(17);\nactivePromptIndicies.push(18);\nactivePromptIndicies.push(19);\n\nreturn activePromptIndicies;\n}\n",
             "operationIdx": 4
           },
           {
-            "clause": "do section module1",
-            "_row_num": 19,
-            "__rowNum__": 18,
-            "_token_type": "do_section",
-            "_do_section_name": "module1",
-            "operationIdx": 5
-          },
-          {
-            "clause": "goto choose_module",
-            "_row_num": 20,
-            "__rowNum__": 19,
-            "_token_type": "goto_label",
-            "_branch_label": "choose_module",
-            "operationIdx": 6
-          },
-          {
-            "clause": "do section module2",
-            "_row_num": 22,
-            "__rowNum__": 21,
-            "_token_type": "do_section",
-            "_do_section_name": "module2",
-            "operationIdx": 7
-          },
-          {
-            "clause": "goto choose_module",
-            "_row_num": 23,
-            "__rowNum__": 22,
-            "_token_type": "goto_label",
-            "_branch_label": "choose_module",
-            "operationIdx": 8
-          },
-          {
-            "clause": "do section module3",
-            "_row_num": 25,
-            "__rowNum__": 24,
-            "_token_type": "do_section",
-            "_do_section_name": "module3",
-            "operationIdx": 9
-          },
-          {
-            "clause": "goto choose_module",
-            "_row_num": 26,
-            "__rowNum__": 25,
-            "_token_type": "goto_label",
-            "_branch_label": "choose_module",
-            "operationIdx": 10
-          },
-          {
-            "clause": "do section module4",
-            "_row_num": 28,
-            "__rowNum__": 27,
-            "_token_type": "do_section",
-            "_do_section_name": "module4",
-            "operationIdx": 11
-          },
-          {
-            "clause": "goto choose_module",
+            "clause": "goto end",
+            "condition": "data('highest_module') < 2",
             "_row_num": 29,
             "__rowNum__": 28,
             "_token_type": "goto_label",
-            "_branch_label": "choose_module",
-            "operationIdx": 12
+            "_branch_label": "end",
+            "operationIdx": 5
           },
           {
-            "_row_num": 31,
+            "clause": "begin screen",
+            "_row_num": 30,
+            "__rowNum__": 29,
             "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(13);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 13
+            "_end_screen_clause": {
+              "clause": "end screen",
+              "_row_num": 39,
+              "__rowNum__": 38,
+              "_token_type": "end_screen"
+            },
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(20);\nactivePromptIndicies.push(21);\nactivePromptIndicies.push(22);\nactivePromptIndicies.push(23);\nactivePromptIndicies.push(24);\nactivePromptIndicies.push(25);\nactivePromptIndicies.push(26);\nactivePromptIndicies.push(27);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 6
+          },
+          {
+            "clause": "goto end",
+            "condition": "data('highest_module') < 3",
+            "_row_num": 40,
+            "__rowNum__": 39,
+            "_token_type": "goto_label",
+            "_branch_label": "end",
+            "operationIdx": 7
+          },
+          {
+            "clause": "begin screen",
+            "_row_num": 41,
+            "__rowNum__": 40,
+            "_token_type": "begin_screen",
+            "_end_screen_clause": {
+              "clause": "end screen",
+              "_row_num": 56,
+              "__rowNum__": 55,
+              "_token_type": "end_screen"
+            },
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(28);\nactivePromptIndicies.push(29);\nactivePromptIndicies.push(30);\nactivePromptIndicies.push(31);\nactivePromptIndicies.push(32);\nactivePromptIndicies.push(33);\nactivePromptIndicies.push(34);\nactivePromptIndicies.push(35);\nactivePromptIndicies.push(36);\nactivePromptIndicies.push(37);\nactivePromptIndicies.push(38);\nactivePromptIndicies.push(39);\nactivePromptIndicies.push(40);\nactivePromptIndicies.push(41);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 8
+          },
+          {
+            "clause": "goto end",
+            "condition": "data('highest_module') < 4",
+            "_row_num": 57,
+            "__rowNum__": 56,
+            "_token_type": "goto_label",
+            "_branch_label": "end",
+            "operationIdx": 9
+          },
+          {
+            "clause": "begin screen",
+            "_row_num": 58,
+            "__rowNum__": 57,
+            "_token_type": "begin_screen",
+            "_end_screen_clause": {
+              "clause": "end screen",
+              "required": "data('highest_module') >= 4",
+              "_row_num": 65,
+              "__rowNum__": 64,
+              "_token_type": "end_screen"
+            },
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(42);\nactivePromptIndicies.push(43);\nactivePromptIndicies.push(44);\nactivePromptIndicies.push(45);\nactivePromptIndicies.push(46);\nactivePromptIndicies.push(47);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 10
+          },
+          {
+            "_row_num": 67,
+            "_token_type": "begin_screen",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(48);\n\nreturn activePromptIndicies;\n}\n",
+            "operationIdx": 11
           },
           {
             "_token_type": "exit_section",
             "clause": "exit section",
-            "_row_num": 32,
-            "operationIdx": 14
+            "_row_num": 68,
+            "operationIdx": 12
           },
           {
-            "_row_num": 32,
+            "_row_num": 68,
             "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(14);\n\nreturn activePromptIndicies;\n}\n",
+            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(49);\n\nreturn activePromptIndicies;\n}\n",
             "screen": {
               "hideInBackHistory": true
             },
-            "operationIdx": 15
+            "operationIdx": 13
           },
           {
             "_token_type": "resume",
             "clause": "resume",
-            "_row_num": 32,
-            "operationIdx": 16
+            "_row_num": 68,
+            "operationIdx": 14
           }
         ],
         "branch_label_map": {
           "_screen2": 0,
           "_screen3": 1,
           "_screen10": 2,
-          "choose_module": 3,
-          "_screen16": 3,
-          "module1": 5,
-          "module2": 7,
-          "module3": 9,
-          "module4": 11,
-          "end": 13,
-          "_screen31": 13,
-          "_contents": 15,
-          "_screen32": 15
-        }
-      },
-      "module1": {
-        "section_name": "module1",
-        "nested_sections": {},
-        "reachable_sections": {},
-        "prompts": [
-          {
-            "type": "integer",
-            "name": "household_visits",
-            "display": {
-              "prompt": {
-                "text": "1.2A - # of Routine Household Visits"
-              }
-            },
-            "required": 1,
-            "_row_num": 3,
-            "__rowNum__": 2,
-            "_token_type": "prompt",
-            "_type": "integer",
-            "_branch_label_enclosing_screen": "module1/_screen2",
-            "promptIdx": 0
-          },
-          {
-            "type": "integer",
-            "name": "births_home",
-            "display": {
-              "prompt": {
-                "text": "1.2B - # of Births (community/home)"
-              }
-            },
-            "required": 1,
-            "_row_num": 4,
-            "__rowNum__": 3,
-            "_token_type": "prompt",
-            "_type": "integer",
-            "_branch_label_enclosing_screen": "module1/_screen2",
-            "promptIdx": 1
-          },
-          {
-            "type": "integer",
-            "name": "births_facility",
-            "display": {
-              "prompt": {
-                "text": "1.2C - # of Births (facility)"
-              }
-            },
-            "required": 1,
-            "_row_num": 5,
-            "__rowNum__": 4,
-            "_token_type": "prompt",
-            "_type": "integer",
-            "_branch_label_enclosing_screen": "module1/_screen2",
-            "promptIdx": 2
-          },
-          {
-            "type": "integer",
-            "name": "still_births",
-            "display": {
-              "prompt": {
-                "text": "1.2D - # of Still Births"
-              }
-            },
-            "required": 1,
-            "_row_num": 6,
-            "__rowNum__": 5,
-            "_token_type": "prompt",
-            "_type": "integer",
-            "_branch_label_enclosing_screen": "module1/_screen2",
-            "promptIdx": 3
-          },
-          {
-            "type": "integer",
-            "name": "neonatal_deaths",
-            "display": {
-              "prompt": {
-                "text": "1.2E - # of Neonatal Deaths"
-              }
-            },
-            "required": 1,
-            "_row_num": 9,
-            "__rowNum__": 8,
-            "_token_type": "prompt",
-            "_type": "integer",
-            "_branch_label_enclosing_screen": "module1/_screen8",
-            "promptIdx": 4
-          },
-          {
-            "type": "integer",
-            "name": "post_neonatal_deaths",
-            "display": {
-              "prompt": {
-                "text": "1.2F - # of Post-neonatal Deaths"
-              }
-            },
-            "required": 1,
-            "_row_num": 10,
-            "__rowNum__": 9,
-            "_token_type": "prompt",
-            "_type": "integer",
-            "_branch_label_enclosing_screen": "module1/_screen8",
-            "promptIdx": 5
-          },
-          {
-            "type": "integer",
-            "name": "child_deaths",
-            "display": {
-              "prompt": {
-                "text": "1.2G - # of Child Deaths"
-              }
-            },
-            "required": 1,
-            "_row_num": 11,
-            "__rowNum__": 10,
-            "_token_type": "prompt",
-            "_type": "integer",
-            "_branch_label_enclosing_screen": "module1/_screen8",
-            "promptIdx": 6
-          },
-          {
-            "type": "integer",
-            "name": "maternal_deaths",
-            "display": {
-              "prompt": {
-                "text": "1.2H - # of Maternal Deaths"
-              }
-            },
-            "required": 1,
-            "_row_num": 12,
-            "__rowNum__": 11,
-            "_token_type": "prompt",
-            "_type": "integer",
-            "_branch_label_enclosing_screen": "module1/_screen8",
-            "promptIdx": 7
-          },
-          {
-            "type": "integer",
-            "name": "community_triggers",
-            "display": {
-              "prompt": {
-                "text": "1.2I - # of Community Triggers"
-              }
-            },
-            "required": 1,
-            "_row_num": 15,
-            "__rowNum__": 14,
-            "_token_type": "prompt",
-            "_type": "integer",
-            "_branch_label_enclosing_screen": "module1/_screen14",
-            "promptIdx": 8
-          },
-          {
-            "type": "integer",
-            "name": "suspect_referrals",
-            "display": {
-              "prompt": {
-                "text": "1.2J - # of HIV, TB, Neglected Tropical Disease, Mental Health Suspect Referrals"
-              }
-            },
-            "required": 1,
-            "_row_num": 16,
-            "__rowNum__": 15,
-            "_token_type": "prompt",
-            "_type": "integer",
-            "_branch_label_enclosing_screen": "module1/_screen14",
-            "promptIdx": 9
-          },
-          {
-            "type": "integer",
-            "name": "deaths_home",
-            "display": {
-              "prompt": {
-                "text": "1.2K - # of Deaths (over 5 years) in the community/home"
-              }
-            },
-            "required": 1,
-            "_row_num": 17,
-            "__rowNum__": 16,
-            "_token_type": "prompt",
-            "_type": "integer",
-            "_branch_label_enclosing_screen": "module1/_screen14",
-            "promptIdx": 10
-          },
-          {
-            "_token_type": "prompt",
-            "type": "contents",
-            "_type": "contents",
-            "_row_num": 19,
-            "_branch_label_enclosing_screen": "module1/_screen19",
-            "promptIdx": 11
-          }
-        ],
-        "validation_tag_map": {
-          "finalize": [
-            0,
-            1,
-            2,
-            3,
-            4,
-            5,
-            6,
-            7,
-            8,
-            9,
-            10
-          ]
-        },
-        "operations": [
-          {
-            "clause": "begin screen",
-            "_row_num": 2,
-            "__rowNum__": 1,
-            "_token_type": "begin_screen",
-            "_end_screen_clause": {
-              "clause": "end screen",
-              "_row_num": 7,
-              "__rowNum__": 6,
-              "_token_type": "end_screen"
-            },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(0);\nactivePromptIndicies.push(1);\nactivePromptIndicies.push(2);\nactivePromptIndicies.push(3);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 0
-          },
-          {
-            "clause": "begin screen",
-            "_row_num": 8,
-            "__rowNum__": 7,
-            "_token_type": "begin_screen",
-            "_end_screen_clause": {
-              "clause": "end screen",
-              "_row_num": 13,
-              "__rowNum__": 12,
-              "_token_type": "end_screen"
-            },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(4);\nactivePromptIndicies.push(5);\nactivePromptIndicies.push(6);\nactivePromptIndicies.push(7);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 1
-          },
-          {
-            "clause": "begin screen",
-            "_row_num": 14,
-            "__rowNum__": 13,
-            "_token_type": "begin_screen",
-            "_end_screen_clause": {
-              "clause": "end screen",
-              "_row_num": 18,
-              "__rowNum__": 17,
-              "_token_type": "end_screen"
-            },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(8);\nactivePromptIndicies.push(9);\nactivePromptIndicies.push(10);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 2
-          },
-          {
-            "_token_type": "exit_section",
-            "clause": "exit section",
-            "_row_num": 19,
-            "operationIdx": 3
-          },
-          {
-            "_row_num": 19,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(11);\n\nreturn activePromptIndicies;\n}\n",
-            "screen": {
-              "hideInBackHistory": true
-            },
-            "operationIdx": 4
-          },
-          {
-            "_token_type": "resume",
-            "clause": "resume",
-            "_row_num": 19,
-            "operationIdx": 5
-          }
-        ],
-        "branch_label_map": {
-          "_screen2": 0,
-          "_screen8": 1,
-          "_screen14": 2,
-          "_contents": 4,
-          "_screen19": 4
-        }
-      },
-      "module2": {
-        "section_name": "module2",
-        "nested_sections": {},
-        "reachable_sections": {},
-        "prompts": [
-          {
-            "type": "integer",
-            "name": "pregnant_visits",
-            "display": {
-              "prompt": {
-                "text": "2.1A - # of Pregnant Woman Visits"
-              }
-            },
-            "required": 1,
-            "_row_num": 3,
-            "__rowNum__": 2,
-            "_token_type": "prompt",
-            "_type": "integer",
-            "_branch_label_enclosing_screen": "module2/_screen2",
-            "promptIdx": 0
-          },
-          {
-            "type": "integer",
-            "name": "clients_referred_delivery",
-            "display": {
-              "prompt": {
-                "text": "2.1B - # of Clients Referred For Delivery"
-              }
-            },
-            "required": 1,
-            "_row_num": 4,
-            "__rowNum__": 3,
-            "_token_type": "prompt",
-            "_type": "integer",
-            "_branch_label_enclosing_screen": "module2/_screen2",
-            "promptIdx": 1
-          },
-          {
-            "type": "integer",
-            "name": "referred_anc_visit",
-            "display": {
-              "prompt": {
-                "text": "2.1C - # of Referred for ANC Visit"
-              }
-            },
-            "required": 1,
-            "_row_num": 5,
-            "__rowNum__": 4,
-            "_token_type": "prompt",
-            "_type": "integer",
-            "_branch_label_enclosing_screen": "module2/_screen2",
-            "promptIdx": 2
-          },
-          {
-            "type": "integer",
-            "name": "post_natal_visits",
-            "display": {
-              "prompt": {
-                "text": "2.1D - # of Post Natal Visits"
-              }
-            },
-            "required": 1,
-            "_row_num": 6,
-            "__rowNum__": 5,
-            "_token_type": "prompt",
-            "_type": "integer",
-            "_branch_label_enclosing_screen": "module2/_screen2",
-            "promptIdx": 3
-          },
-          {
-            "type": "integer",
-            "name": "clients_referred_maternal_danger_sign",
-            "display": {
-              "prompt": {
-                "text": "2.1 E - # of Clients Referred for Woman & Newborn Danger Sign"
-              }
-            },
-            "required": 1,
-            "_row_num": 9,
-            "__rowNum__": 8,
-            "_token_type": "prompt",
-            "_type": "integer",
-            "_branch_label_enclosing_screen": "module2/_screen8",
-            "promptIdx": 4
-          },
-          {
-            "type": "integer",
-            "name": "hbmnc_within_two_days_mother",
-            "display": {
-              "prompt": {
-                "text": "2.1F - # of HBMNC within 48 hours – Mother"
-              },
-              "hint": {
-                "text": "Number of mothers who received home based maternal and neonatal care (HBMNC) within two days after birth or after returning from the facility"
-              }
-            },
-            "required": 1,
-            "_row_num": 10,
-            "__rowNum__": 9,
-            "_token_type": "prompt",
-            "_type": "integer",
-            "_branch_label_enclosing_screen": "module2/_screen8",
-            "promptIdx": 5
-          },
-          {
-            "type": "integer",
-            "name": "hbmnc_within_two_days_infant",
-            "display": {
-              "prompt": {
-                "text": "2.1G - # of HBMNC within 48 hours – Infant"
-              },
-              "hint": {
-                "text": "Number of newborns who received home based maternal and neonatal care (HBMNC) within two days after birth or after returning from the facility"
-              }
-            },
-            "required": 1,
-            "_row_num": 11,
-            "__rowNum__": 10,
-            "_token_type": "prompt",
-            "_type": "integer",
-            "_branch_label_enclosing_screen": "module2/_screen8",
-            "promptIdx": 6
-          },
-          {
-            "type": "integer",
-            "name": "clients_using_family_planning",
-            "display": {
-              "prompt": {
-                "text": "2.2A - # of Clients Currently Using Modern Family Planning"
-              }
-            },
-            "required": 1,
-            "_row_num": 12,
-            "__rowNum__": 11,
-            "_token_type": "prompt",
-            "_type": "integer",
-            "_branch_label_enclosing_screen": "module2/_screen8",
-            "promptIdx": 7
-          },
-          {
-            "_token_type": "prompt",
-            "type": "contents",
-            "_type": "contents",
-            "_row_num": 14,
-            "_branch_label_enclosing_screen": "module2/_screen14",
-            "promptIdx": 8
-          }
-        ],
-        "validation_tag_map": {
-          "finalize": [
-            0,
-            1,
-            2,
-            3,
-            4,
-            5,
-            6,
-            7
-          ]
-        },
-        "operations": [
-          {
-            "clause": "begin screen",
-            "_row_num": 2,
-            "__rowNum__": 1,
-            "_token_type": "begin_screen",
-            "_end_screen_clause": {
-              "clause": "end screen",
-              "_row_num": 7,
-              "__rowNum__": 6,
-              "_token_type": "end_screen"
-            },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(0);\nactivePromptIndicies.push(1);\nactivePromptIndicies.push(2);\nactivePromptIndicies.push(3);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 0
-          },
-          {
-            "clause": "begin screen",
-            "_row_num": 8,
-            "__rowNum__": 7,
-            "_token_type": "begin_screen",
-            "_end_screen_clause": {
-              "clause": "end screen",
-              "_row_num": 13,
-              "__rowNum__": 12,
-              "_token_type": "end_screen"
-            },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(4);\nactivePromptIndicies.push(5);\nactivePromptIndicies.push(6);\nactivePromptIndicies.push(7);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 1
-          },
-          {
-            "_token_type": "exit_section",
-            "clause": "exit section",
-            "_row_num": 14,
-            "operationIdx": 2
-          },
-          {
-            "_row_num": 14,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(8);\n\nreturn activePromptIndicies;\n}\n",
-            "screen": {
-              "hideInBackHistory": true
-            },
-            "operationIdx": 3
-          },
-          {
-            "_token_type": "resume",
-            "clause": "resume",
-            "_row_num": 14,
-            "operationIdx": 4
-          }
-        ],
-        "branch_label_map": {
-          "_screen2": 0,
-          "_screen8": 1,
-          "_contents": 3,
-          "_screen14": 3
-        }
-      },
-      "module3": {
-        "section_name": "module3",
-        "nested_sections": {},
-        "reachable_sections": {},
-        "prompts": [
-          {
-            "type": "integer",
-            "name": "active_case_finds",
-            "display": {
-              "prompt": {
-                "text": "3.1A - # of Active Case Finds"
-              }
-            },
-            "required": 1,
-            "_row_num": 3,
-            "__rowNum__": 2,
-            "_token_type": "prompt",
-            "_type": "integer",
-            "_branch_label_enclosing_screen": "module3/_screen2",
-            "promptIdx": 0
-          },
-          {
-            "type": "integer",
-            "name": "red_muac",
-            "display": {
-              "prompt": {
-                "text": "3.1B - # of Red MUAC (severe malnutrition)"
-              }
-            },
-            "required": 1,
-            "_row_num": 4,
-            "__rowNum__": 3,
-            "_token_type": "prompt",
-            "_type": "integer",
-            "_branch_label_enclosing_screen": "module3/_screen2",
-            "promptIdx": 1
-          },
-          {
-            "type": "integer",
-            "name": "yellow_muac",
-            "display": {
-              "prompt": {
-                "text": "3.1C - # of Yellow MUAC (moderate malnutrition)"
-              }
-            },
-            "required": 1,
-            "_row_num": 5,
-            "__rowNum__": 4,
-            "_token_type": "prompt",
-            "_type": "integer",
-            "_branch_label_enclosing_screen": "module3/_screen2",
-            "promptIdx": 2
-          },
-          {
-            "type": "integer",
-            "name": "green_muac",
-            "display": {
-              "prompt": {
-                "text": "3.1D - # of Green MUAC"
-              }
-            },
-            "required": 1,
-            "_row_num": 6,
-            "__rowNum__": 5,
-            "_token_type": "prompt",
-            "_type": "integer",
-            "_branch_label_enclosing_screen": "module3/_screen2",
-            "promptIdx": 3
-          },
-          {
-            "type": "integer",
-            "name": "pneumonia_cases_identified",
-            "display": {
-              "prompt": {
-                "text": "3.1E - # of Pneumonia Cases Identified"
-              }
-            },
-            "required": 1,
-            "_row_num": 9,
-            "__rowNum__": 8,
-            "_token_type": "prompt",
-            "_type": "integer",
-            "_branch_label_enclosing_screen": "module3/_screen8",
-            "promptIdx": 4
-          },
-          {
-            "type": "integer",
-            "name": "malaria_cases_identified",
-            "display": {
-              "prompt": {
-                "text": "3.1F - # of Malaria Cases Identified (RDT positive)"
-              }
-            },
-            "required": 1,
-            "_row_num": 10,
-            "__rowNum__": 9,
-            "_token_type": "prompt",
-            "_type": "integer",
-            "_branch_label_enclosing_screen": "module3/_screen8",
-            "promptIdx": 5
-          },
-          {
-            "type": "integer",
-            "name": "diarrhea_cases_identified",
-            "display": {
-              "prompt": {
-                "text": "3.1G - # of Diarrhea Cases Identified"
-              }
-            },
-            "required": 1,
-            "_row_num": 11,
-            "__rowNum__": 10,
-            "_token_type": "prompt",
-            "_type": "integer",
-            "_branch_label_enclosing_screen": "module3/_screen8",
-            "promptIdx": 6
-          },
-          {
-            "type": "integer",
-            "name": "pneumonia_patients_treated",
-            "display": {
-              "prompt": {
-                "text": "3.1H - # of Pneumonia Patients Treated with Antibiotics"
-              }
-            },
-            "required": 1,
-            "_row_num": 12,
-            "__rowNum__": 11,
-            "_token_type": "prompt",
-            "_type": "integer",
-            "_branch_label_enclosing_screen": "module3/_screen8",
-            "promptIdx": 7
-          },
-          {
-            "type": "integer",
-            "name": "malaria_infants_treated",
-            "display": {
-              "prompt": {
-                "text": "3.1I - # of Malaria Patients Treated (2-11 months)"
-              }
-            },
-            "required": 1,
-            "_row_num": 15,
-            "__rowNum__": 14,
-            "_token_type": "prompt",
-            "_type": "integer",
-            "_branch_label_enclosing_screen": "module3/_screen14",
-            "promptIdx": 8
-          },
-          {
-            "type": "integer",
-            "name": "malaria_children_treated",
-            "display": {
-              "prompt": {
-                "text": "3.1J - # of Malaria Patients Treated (1-5 years)"
-              }
-            },
-            "required": 1,
-            "_row_num": 16,
-            "__rowNum__": 15,
-            "_token_type": "prompt",
-            "_type": "integer",
-            "_branch_label_enclosing_screen": "module3/_screen14",
-            "promptIdx": 9
-          },
-          {
-            "type": "integer",
-            "name": "malaria_patients_treated_under_day",
-            "display": {
-              "prompt": {
-                "text": "3.1K - # of Malaria Patients Treated in Less than 24 Hours"
-              }
-            },
-            "required": 1,
-            "_row_num": 17,
-            "__rowNum__": 16,
-            "_token_type": "prompt",
-            "_type": "integer",
-            "_branch_label_enclosing_screen": "module3/_screen14",
-            "promptIdx": 10
-          },
-          {
-            "type": "integer",
-            "name": "malaria_patients_treated_over_day",
-            "display": {
-              "prompt": {
-                "text": "3.1L - # of Malaria Patients Treated in More than 24 Hours"
-              }
-            },
-            "required": 1,
-            "_row_num": 18,
-            "__rowNum__": 17,
-            "_token_type": "prompt",
-            "_type": "integer",
-            "_branch_label_enclosing_screen": "module3/_screen14",
-            "promptIdx": 11
-          },
-          {
-            "type": "integer",
-            "name": "diarrhea_patients_treated_zinc_ors",
-            "display": {
-              "prompt": {
-                "text": "3.1M - # of Diarrhea Patients Treated with Zinc & ORS"
-              }
-            },
-            "required": 1,
-            "_row_num": 21,
-            "__rowNum__": 20,
-            "_token_type": "prompt",
-            "_type": "integer",
-            "_branch_label_enclosing_screen": "module3/_screen20",
-            "promptIdx": 12
-          },
-          {
-            "type": "integer",
-            "name": "iccem_patients_referred",
-            "display": {
-              "prompt": {
-                "text": "3.1N - # of iCCM Patients Referred to Health Facility"
-              }
-            },
-            "required": 1,
-            "_row_num": 22,
-            "__rowNum__": 21,
-            "_token_type": "prompt",
-            "_type": "integer",
-            "_branch_label_enclosing_screen": "module3/_screen20",
-            "promptIdx": 13
-          },
-          {
-            "_token_type": "prompt",
-            "type": "contents",
-            "_type": "contents",
-            "_row_num": 24,
-            "_branch_label_enclosing_screen": "module3/_screen24",
-            "promptIdx": 14
-          }
-        ],
-        "validation_tag_map": {
-          "finalize": [
-            0,
-            1,
-            2,
-            3,
-            4,
-            5,
-            6,
-            7,
-            8,
-            9,
-            10,
-            11,
-            12,
-            13
-          ]
-        },
-        "operations": [
-          {
-            "clause": "begin screen",
-            "_row_num": 2,
-            "__rowNum__": 1,
-            "_token_type": "begin_screen",
-            "_end_screen_clause": {
-              "clause": "end screen",
-              "_row_num": 7,
-              "__rowNum__": 6,
-              "_token_type": "end_screen"
-            },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(0);\nactivePromptIndicies.push(1);\nactivePromptIndicies.push(2);\nactivePromptIndicies.push(3);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 0
-          },
-          {
-            "clause": "begin screen",
-            "_row_num": 8,
-            "__rowNum__": 7,
-            "_token_type": "begin_screen",
-            "_end_screen_clause": {
-              "clause": "end screen",
-              "_row_num": 13,
-              "__rowNum__": 12,
-              "_token_type": "end_screen"
-            },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(4);\nactivePromptIndicies.push(5);\nactivePromptIndicies.push(6);\nactivePromptIndicies.push(7);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 1
-          },
-          {
-            "clause": "begin screen",
-            "_row_num": 14,
-            "__rowNum__": 13,
-            "_token_type": "begin_screen",
-            "_end_screen_clause": {
-              "clause": "end screen",
-              "_row_num": 19,
-              "__rowNum__": 18,
-              "_token_type": "end_screen"
-            },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(8);\nactivePromptIndicies.push(9);\nactivePromptIndicies.push(10);\nactivePromptIndicies.push(11);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 2
-          },
-          {
-            "clause": "begin screen",
-            "_row_num": 20,
-            "__rowNum__": 19,
-            "_token_type": "begin_screen",
-            "_end_screen_clause": {
-              "clause": "end screen",
-              "_row_num": 23,
-              "__rowNum__": 22,
-              "_token_type": "end_screen"
-            },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(12);\nactivePromptIndicies.push(13);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 3
-          },
-          {
-            "_token_type": "exit_section",
-            "clause": "exit section",
-            "_row_num": 24,
-            "operationIdx": 4
-          },
-          {
-            "_row_num": 24,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(14);\n\nreturn activePromptIndicies;\n}\n",
-            "screen": {
-              "hideInBackHistory": true
-            },
-            "operationIdx": 5
-          },
-          {
-            "_token_type": "resume",
-            "clause": "resume",
-            "_row_num": 24,
-            "operationIdx": 6
-          }
-        ],
-        "branch_label_map": {
-          "_screen2": 0,
-          "_screen8": 1,
-          "_screen14": 2,
-          "_screen20": 3,
-          "_contents": 5,
-          "_screen24": 5
-        }
-      },
-      "module4": {
-        "section_name": "module4",
-        "nested_sections": {},
-        "reachable_sections": {},
-        "prompts": [
-          {
-            "type": "integer",
-            "name": "hiv_client_visits",
-            "display": {
-              "prompt": {
-                "text": "4.1A - # of HIV Client Visits"
-              }
-            },
-            "required": 1,
-            "_row_num": 3,
-            "__rowNum__": 2,
-            "_token_type": "prompt",
-            "_type": "integer",
-            "_branch_label_enclosing_screen": "module4/_screen2",
-            "promptIdx": 0
-          },
-          {
-            "type": "integer",
-            "name": "tb_client_visits",
-            "display": {
-              "prompt": {
-                "text": "4.1B - # of Tuberculosis (TB) Client Visits"
-              }
-            },
-            "required": 1,
-            "_row_num": 4,
-            "__rowNum__": 3,
-            "_token_type": "prompt",
-            "_type": "integer",
-            "_branch_label_enclosing_screen": "module4/_screen2",
-            "promptIdx": 1
-          },
-          {
-            "type": "integer",
-            "name": "neglected_ntd_client_visits",
-            "display": {
-              "prompt": {
-                "text": "4.1C - # of Neglected Tropical Disease (NTD) Client Visits"
-              }
-            },
-            "required": 1,
-            "_row_num": 5,
-            "__rowNum__": 4,
-            "_token_type": "prompt",
-            "_type": "integer",
-            "_branch_label_enclosing_screen": "module4/_screen2",
-            "promptIdx": 2
-          },
-          {
-            "type": "integer",
-            "name": "mental_health_client_visits",
-            "display": {
-              "prompt": {
-                "text": "4.1D - # of Mental Health Client Visits"
-              }
-            },
-            "required": 1,
-            "_row_num": 6,
-            "__rowNum__": 5,
-            "_token_type": "prompt",
-            "_type": "integer",
-            "_branch_label_enclosing_screen": "module4/_screen2",
-            "promptIdx": 3
-          },
-          {
-            "type": "integer",
-            "name": "ltfu_hiv_clients_traced",
-            "display": {
-              "prompt": {
-                "text": "4.1E - # of Lost to Follow-up (LTFU) HIV Clients Traced"
-              }
-            },
-            "required": 1,
-            "_row_num": 9,
-            "__rowNum__": 8,
-            "_token_type": "prompt",
-            "_type": "integer",
-            "_branch_label_enclosing_screen": "module4/_screen8",
-            "promptIdx": 4
-          },
-          {
-            "type": "integer",
-            "name": "ltfu_tb_clients_traced",
-            "display": {
-              "prompt": {
-                "text": "4.1F - # of Lost to Follow-up (LTFU) Tuberculosis (TB) Clients Traced"
-              }
-            },
-            "required": 1,
-            "_row_num": 10,
-            "__rowNum__": 9,
-            "_token_type": "prompt",
-            "_type": "integer",
-            "_branch_label_enclosing_screen": "module4/_screen8",
-            "promptIdx": 5
-          },
-          {
-            "_token_type": "prompt",
-            "type": "contents",
-            "_type": "contents",
-            "_row_num": 12,
-            "_branch_label_enclosing_screen": "module4/_screen12",
-            "promptIdx": 6
-          }
-        ],
-        "validation_tag_map": {
-          "finalize": [
-            0,
-            1,
-            2,
-            3,
-            4,
-            5
-          ]
-        },
-        "operations": [
-          {
-            "clause": "begin screen",
-            "_row_num": 2,
-            "__rowNum__": 1,
-            "_token_type": "begin_screen",
-            "_end_screen_clause": {
-              "clause": "end screen",
-              "_row_num": 7,
-              "__rowNum__": 6,
-              "_token_type": "end_screen"
-            },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(0);\nactivePromptIndicies.push(1);\nactivePromptIndicies.push(2);\nactivePromptIndicies.push(3);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 0
-          },
-          {
-            "clause": "begin screen",
-            "_row_num": 8,
-            "__rowNum__": 7,
-            "_token_type": "begin_screen",
-            "_end_screen_clause": {
-              "clause": "end screen",
-              "_row_num": 11,
-              "__rowNum__": 10,
-              "_token_type": "end_screen"
-            },
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(4);\nactivePromptIndicies.push(5);\n\nreturn activePromptIndicies;\n}\n",
-            "operationIdx": 1
-          },
-          {
-            "_token_type": "exit_section",
-            "clause": "exit section",
-            "_row_num": 12,
-            "operationIdx": 2
-          },
-          {
-            "_row_num": 12,
-            "_token_type": "begin_screen",
-            "_screen_block": "function() {var activePromptIndicies = [];\nactivePromptIndicies.push(6);\n\nreturn activePromptIndicies;\n}\n",
-            "screen": {
-              "hideInBackHistory": true
-            },
-            "operationIdx": 3
-          },
-          {
-            "_token_type": "resume",
-            "clause": "resume",
-            "_row_num": 12,
-            "operationIdx": 4
-          }
-        ],
-        "branch_label_map": {
-          "_screen2": 0,
-          "_screen8": 1,
-          "_contents": 3,
-          "_screen12": 3
+          "_screen16": 4,
+          "_screen30": 6,
+          "_screen41": 8,
+          "_screen58": 10,
+          "end": 11,
+          "_screen67": 11,
+          "_contents": 13,
+          "_screen68": 13
         }
       },
       "initial": {
@@ -3181,11 +2638,7 @@
           "survey": true
         },
         "reachable_sections": {
-          "survey": true,
-          "module1": true,
-          "module2": true,
-          "module3": true,
-          "module4": true
+          "survey": true
         },
         "prompts": [
           {
@@ -3208,7 +2661,7 @@
             "promptIdx": 1,
             "display": {
               "title": {
-                "text": "CHA"
+                "text": "Monthly Report"
               }
             },
             "_branch_label_enclosing_screen": "survey/0"
@@ -3452,11 +2905,25 @@
         "elementSet": "data",
         "elementPath": "reporting_month"
       },
+      "highest_module": {
+        "_defn": [
+          {
+            "_row_num": 13,
+            "section_name": "survey"
+          }
+        ],
+        "type": "string",
+        "valuesList": "modules",
+        "elementKey": "highest_module",
+        "elementName": "highest_module",
+        "elementSet": "data",
+        "elementPath": "highest_module"
+      },
       "household_visits": {
         "_defn": [
           {
-            "_row_num": 3,
-            "section_name": "module1"
+            "_row_num": 17,
+            "section_name": "survey"
           }
         ],
         "type": "integer",
@@ -3468,8 +2935,8 @@
       "births_home": {
         "_defn": [
           {
-            "_row_num": 4,
-            "section_name": "module1"
+            "_row_num": 18,
+            "section_name": "survey"
           }
         ],
         "type": "integer",
@@ -3481,8 +2948,8 @@
       "births_facility": {
         "_defn": [
           {
-            "_row_num": 5,
-            "section_name": "module1"
+            "_row_num": 19,
+            "section_name": "survey"
           }
         ],
         "type": "integer",
@@ -3494,8 +2961,8 @@
       "still_births": {
         "_defn": [
           {
-            "_row_num": 6,
-            "section_name": "module1"
+            "_row_num": 20,
+            "section_name": "survey"
           }
         ],
         "type": "integer",
@@ -3507,8 +2974,8 @@
       "neonatal_deaths": {
         "_defn": [
           {
-            "_row_num": 9,
-            "section_name": "module1"
+            "_row_num": 21,
+            "section_name": "survey"
           }
         ],
         "type": "integer",
@@ -3520,8 +2987,8 @@
       "post_neonatal_deaths": {
         "_defn": [
           {
-            "_row_num": 10,
-            "section_name": "module1"
+            "_row_num": 22,
+            "section_name": "survey"
           }
         ],
         "type": "integer",
@@ -3533,8 +3000,8 @@
       "child_deaths": {
         "_defn": [
           {
-            "_row_num": 11,
-            "section_name": "module1"
+            "_row_num": 23,
+            "section_name": "survey"
           }
         ],
         "type": "integer",
@@ -3546,8 +3013,8 @@
       "maternal_deaths": {
         "_defn": [
           {
-            "_row_num": 12,
-            "section_name": "module1"
+            "_row_num": 24,
+            "section_name": "survey"
           }
         ],
         "type": "integer",
@@ -3559,8 +3026,8 @@
       "community_triggers": {
         "_defn": [
           {
-            "_row_num": 15,
-            "section_name": "module1"
+            "_row_num": 25,
+            "section_name": "survey"
           }
         ],
         "type": "integer",
@@ -3572,8 +3039,8 @@
       "suspect_referrals": {
         "_defn": [
           {
-            "_row_num": 16,
-            "section_name": "module1"
+            "_row_num": 26,
+            "section_name": "survey"
           }
         ],
         "type": "integer",
@@ -3585,8 +3052,8 @@
       "deaths_home": {
         "_defn": [
           {
-            "_row_num": 17,
-            "section_name": "module1"
+            "_row_num": 27,
+            "section_name": "survey"
           }
         ],
         "type": "integer",
@@ -3598,8 +3065,8 @@
       "pregnant_visits": {
         "_defn": [
           {
-            "_row_num": 3,
-            "section_name": "module2"
+            "_row_num": 31,
+            "section_name": "survey"
           }
         ],
         "type": "integer",
@@ -3611,8 +3078,8 @@
       "clients_referred_delivery": {
         "_defn": [
           {
-            "_row_num": 4,
-            "section_name": "module2"
+            "_row_num": 32,
+            "section_name": "survey"
           }
         ],
         "type": "integer",
@@ -3624,8 +3091,8 @@
       "referred_anc_visit": {
         "_defn": [
           {
-            "_row_num": 5,
-            "section_name": "module2"
+            "_row_num": 33,
+            "section_name": "survey"
           }
         ],
         "type": "integer",
@@ -3637,8 +3104,8 @@
       "post_natal_visits": {
         "_defn": [
           {
-            "_row_num": 6,
-            "section_name": "module2"
+            "_row_num": 34,
+            "section_name": "survey"
           }
         ],
         "type": "integer",
@@ -3650,8 +3117,8 @@
       "clients_referred_maternal_danger_sign": {
         "_defn": [
           {
-            "_row_num": 9,
-            "section_name": "module2"
+            "_row_num": 35,
+            "section_name": "survey"
           }
         ],
         "type": "integer",
@@ -3663,8 +3130,8 @@
       "hbmnc_within_two_days_mother": {
         "_defn": [
           {
-            "_row_num": 10,
-            "section_name": "module2"
+            "_row_num": 36,
+            "section_name": "survey"
           }
         ],
         "type": "integer",
@@ -3676,8 +3143,8 @@
       "hbmnc_within_two_days_infant": {
         "_defn": [
           {
-            "_row_num": 11,
-            "section_name": "module2"
+            "_row_num": 37,
+            "section_name": "survey"
           }
         ],
         "type": "integer",
@@ -3689,8 +3156,8 @@
       "clients_using_family_planning": {
         "_defn": [
           {
-            "_row_num": 12,
-            "section_name": "module2"
+            "_row_num": 38,
+            "section_name": "survey"
           }
         ],
         "type": "integer",
@@ -3702,8 +3169,8 @@
       "active_case_finds": {
         "_defn": [
           {
-            "_row_num": 3,
-            "section_name": "module3"
+            "_row_num": 42,
+            "section_name": "survey"
           }
         ],
         "type": "integer",
@@ -3715,8 +3182,8 @@
       "red_muac": {
         "_defn": [
           {
-            "_row_num": 4,
-            "section_name": "module3"
+            "_row_num": 43,
+            "section_name": "survey"
           }
         ],
         "type": "integer",
@@ -3728,8 +3195,8 @@
       "yellow_muac": {
         "_defn": [
           {
-            "_row_num": 5,
-            "section_name": "module3"
+            "_row_num": 44,
+            "section_name": "survey"
           }
         ],
         "type": "integer",
@@ -3741,8 +3208,8 @@
       "green_muac": {
         "_defn": [
           {
-            "_row_num": 6,
-            "section_name": "module3"
+            "_row_num": 45,
+            "section_name": "survey"
           }
         ],
         "type": "integer",
@@ -3754,8 +3221,8 @@
       "pneumonia_cases_identified": {
         "_defn": [
           {
-            "_row_num": 9,
-            "section_name": "module3"
+            "_row_num": 46,
+            "section_name": "survey"
           }
         ],
         "type": "integer",
@@ -3767,8 +3234,8 @@
       "malaria_cases_identified": {
         "_defn": [
           {
-            "_row_num": 10,
-            "section_name": "module3"
+            "_row_num": 47,
+            "section_name": "survey"
           }
         ],
         "type": "integer",
@@ -3780,8 +3247,8 @@
       "diarrhea_cases_identified": {
         "_defn": [
           {
-            "_row_num": 11,
-            "section_name": "module3"
+            "_row_num": 48,
+            "section_name": "survey"
           }
         ],
         "type": "integer",
@@ -3793,8 +3260,8 @@
       "pneumonia_patients_treated": {
         "_defn": [
           {
-            "_row_num": 12,
-            "section_name": "module3"
+            "_row_num": 49,
+            "section_name": "survey"
           }
         ],
         "type": "integer",
@@ -3806,8 +3273,8 @@
       "malaria_infants_treated": {
         "_defn": [
           {
-            "_row_num": 15,
-            "section_name": "module3"
+            "_row_num": 50,
+            "section_name": "survey"
           }
         ],
         "type": "integer",
@@ -3819,8 +3286,8 @@
       "malaria_children_treated": {
         "_defn": [
           {
-            "_row_num": 16,
-            "section_name": "module3"
+            "_row_num": 51,
+            "section_name": "survey"
           }
         ],
         "type": "integer",
@@ -3832,8 +3299,8 @@
       "malaria_patients_treated_under_day": {
         "_defn": [
           {
-            "_row_num": 17,
-            "section_name": "module3"
+            "_row_num": 52,
+            "section_name": "survey"
           }
         ],
         "type": "integer",
@@ -3845,8 +3312,8 @@
       "malaria_patients_treated_over_day": {
         "_defn": [
           {
-            "_row_num": 18,
-            "section_name": "module3"
+            "_row_num": 53,
+            "section_name": "survey"
           }
         ],
         "type": "integer",
@@ -3858,8 +3325,8 @@
       "diarrhea_patients_treated_zinc_ors": {
         "_defn": [
           {
-            "_row_num": 21,
-            "section_name": "module3"
+            "_row_num": 54,
+            "section_name": "survey"
           }
         ],
         "type": "integer",
@@ -3871,8 +3338,8 @@
       "iccem_patients_referred": {
         "_defn": [
           {
-            "_row_num": 22,
-            "section_name": "module3"
+            "_row_num": 55,
+            "section_name": "survey"
           }
         ],
         "type": "integer",
@@ -3884,8 +3351,8 @@
       "hiv_client_visits": {
         "_defn": [
           {
-            "_row_num": 3,
-            "section_name": "module4"
+            "_row_num": 59,
+            "section_name": "survey"
           }
         ],
         "type": "integer",
@@ -3897,8 +3364,8 @@
       "tb_client_visits": {
         "_defn": [
           {
-            "_row_num": 4,
-            "section_name": "module4"
+            "_row_num": 60,
+            "section_name": "survey"
           }
         ],
         "type": "integer",
@@ -3910,8 +3377,8 @@
       "neglected_ntd_client_visits": {
         "_defn": [
           {
-            "_row_num": 5,
-            "section_name": "module4"
+            "_row_num": 61,
+            "section_name": "survey"
           }
         ],
         "type": "integer",
@@ -3923,8 +3390,8 @@
       "mental_health_client_visits": {
         "_defn": [
           {
-            "_row_num": 6,
-            "section_name": "module4"
+            "_row_num": 62,
+            "section_name": "survey"
           }
         ],
         "type": "integer",
@@ -3936,8 +3403,8 @@
       "ltfu_hiv_clients_traced": {
         "_defn": [
           {
-            "_row_num": 9,
-            "section_name": "module4"
+            "_row_num": 63,
+            "section_name": "survey"
           }
         ],
         "type": "integer",
@@ -3949,8 +3416,8 @@
       "ltfu_tb_clients_traced": {
         "_defn": [
           {
-            "_row_num": 10,
-            "section_name": "module4"
+            "_row_num": 64,
+            "section_name": "survey"
           }
         ],
         "type": "integer",
@@ -4075,6 +3542,13 @@
     "properties": [
       {
         "_partition": "Column",
+        "_aspect": "highest_module",
+        "_key": "displayChoicesList",
+        "_type": "object",
+        "_value": "[{\"choice_list_name\":\"modules\",\"data_value\":1,\"display\":{\"title\":{\"text\":\"Module 1 – Routine Visit\"}},\"_row_num\":17},{\"choice_list_name\":\"modules\",\"data_value\":2,\"display\":{\"title\":{\"text\":\"Module 2 – RMNH\"}},\"_row_num\":18},{\"choice_list_name\":\"modules\",\"data_value\":3,\"display\":{\"title\":{\"text\":\"Module 3 – iCCM\"}},\"_row_num\":19},{\"choice_list_name\":\"modules\",\"data_value\":4,\"display\":{\"title\":{\"text\":\"Module 4 – HIV, TB, NTB\"}},\"_row_num\":20}]"
+      },
+      {
+        "_partition": "Column",
         "_aspect": "reporting_month",
         "_key": "displayChoicesList",
         "_type": "object",
@@ -4085,7 +3559,7 @@
         "_aspect": "reporting_year",
         "_key": "displayChoicesList",
         "_type": "object",
-        "_value": "[{\"choice_list_name\":\"years\",\"data_value\":2018,\"display\":{\"title\":{\"text\":\"2018\"}},\"_row_num\":14},{\"choice_list_name\":\"years\",\"data_value\":2019,\"display\":{\"title\":{\"text\":\"2019\"}},\"_row_num\":15},{\"choice_list_name\":\"years\",\"data_value\":2020,\"display\":{\"title\":{\"text\":\"2020\"}},\"_row_num\":16},{\"choice_list_name\":\"years\",\"data_value\":2021,\"display\":{\"title\":{\"text\":\"2021\"}},\"_row_num\":17}]"
+        "_value": "[{\"choice_list_name\":\"years\",\"data_value\":2019,\"display\":{\"title\":{\"text\":\"2019\"}},\"_row_num\":14},{\"choice_list_name\":\"years\",\"data_value\":2020,\"display\":{\"title\":{\"text\":\"2020\"}},\"_row_num\":15},{\"choice_list_name\":\"years\",\"data_value\":2021,\"display\":{\"title\":{\"text\":\"2021\"}},\"_row_num\":16}]"
       },
       {
         "_partition": "FormType",
@@ -4113,7 +3587,7 @@
         "_aspect": "default",
         "_key": "displayName",
         "_type": "object",
-        "_value": "{\"text\":\"CHA\"}"
+        "_value": "{\"text\":\"Monthly Report\"}"
       }
     ]
   }
