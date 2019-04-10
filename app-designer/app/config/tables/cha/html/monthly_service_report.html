@@ -17,32 +17,35 @@
       <h1>Monthly Service Report</h1>
     </div>
 
-    <form id="filter" class="filter-block">
-      <fieldset>
-        <legend class="filter-label">Filter:</legend>
-        <div class="filter-radio">
-          <div class="filter-option">
-            <input type="radio" name="filter-input" id="no-filter" value="none" checked>
-            <label for="no-filter">No Filter</label>
+    <div class="wrap-collabsible">
+      <input id="collapsible" class="toggle" type="checkbox">
+      <label for="collapsible" class="lbl-toggle">Filter Report</label>
+      <form id="filter" class="filter-block collapsible-content">
+        <fieldset>
+          <div class="filter-radio">
+            <div class="filter-option">
+              <input type="radio" name="filter-input" id="no-filter" value="none" checked>
+              <label for="no-filter">No Filter</label>
+            </div>
+            <div class="filter-option">
+              <input type="radio" name="filter-input" id="this-month-filter" value="thisMonth">
+              <label for="this-month-filter">This Month</label>
+            </div>
+            <div class="filter-option">
+              <input type="radio" name="filter-input" id="last-month-filter" value="lastMonth">
+              <label for="last-month-filter">Last Month</label>
+            </div>
+            <div class="filter-option">
+              <input type="radio" name="filter-input" id="three-month-filter" value="threeMonths">
+              <label for="three-month-filter">Last Three Months</label>
+            </div>
           </div>
-          <div class="filter-option">
-            <input type="radio" name="filter-input" id="this-month-filter" value="thisMonth">
-            <label for="this-month-filter">This Month</label>
+          <div>
+            <button type="submit" id="apply-button">Apply</button>
           </div>
-          <div class="filter-option">
-            <input type="radio" name="filter-input" id="last-month-filter" value="lastMonth">
-            <label for="last-month-filter">Last Month</label>
-          </div>
-          <div class="filter-option">
-            <input type="radio" name="filter-input" id="three-month-filter" value="threeMonths">
-            <label for="three-month-filter">Last Three Months</label>
-          </div>
-        </div>
-        <div>
-          <button type="submit" id="apply-button">Apply</button>
-        </div>
-      </fieldset>
-    </form>
+        </fieldset>
+      </form>
+    </div>
 
     <div class="list">
 
