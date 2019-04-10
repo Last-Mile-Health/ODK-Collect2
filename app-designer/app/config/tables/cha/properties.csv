@@ -5,4 +5,5 @@ Column,reporting_year,displayChoicesList,object,"[{""choice_list_name"":""years"
 FormType,default,FormType.formType,string,SURVEY
 SurveyUtil,default,SurveyUtil.formId,string,cha
 Table,default,defaultViewType,string,SPREADSHEET
+Table,default,detailViewFileName,configpath,config/tables/cha/html/cha_detail.html
 Table,default,displayName,object,"{""text"":""Monthly Report""}"

@@ -848,6 +848,14 @@
         "type": "string",
         "value": "SPREADSHEET",
         "_row_num": 2
+      },
+      {
+        "partition": "Table",
+        "aspect": "default",
+        "key": "detailViewFileName",
+        "type": "configpath",
+        "value": "config/tables/cha/html/cha_detail.html",
+        "_row_num": 3
       }
     ]
   },
@@ -3581,6 +3589,13 @@
         "_key": "defaultViewType",
         "_type": "string",
         "_value": "SPREADSHEET"
+      },
+      {
+        "_partition": "Table",
+        "_aspect": "default",
+        "_key": "detailViewFileName",
+        "_type": "configpath",
+        "_value": "config/tables/cha/html/cha_detail.html"
       },
       {
         "_partition": "Table",
