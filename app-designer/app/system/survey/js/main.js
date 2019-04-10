@@ -20,7 +20,7 @@ requirejs.config({
 		jquerymigrate: 'libs/jquery-migrate-3.0.0',
         bootstrap : 'libs/bootstrap-3.3.7-dist/js/bootstrap.min',
         moment : 'libs/eonasdan/moment',
-        combodate : 'libs/combodate/js/combodate',
+        datetimepicker : 'libs/eonasdan/bootstrap-datetimepicker',
         spinner : 'libs/spinner/waitMe.min',
         backbone : 'libs/backbone.1.3.3',
         handlebars : 'libs/handlebars-v4.0.5',
@@ -67,9 +67,9 @@ requirejs.config({
         'moment': {
             deps: [],
         },
-        'combodate': {
+        'datetimepicker': {
             deps: ['jquery', 'moment'],
-            exports: '$.fn.combodate'
+            exports: '$.fn.datetimepicker'
         },
         'spinner': {
             deps: ['jquery'],
@@ -193,13 +193,13 @@ require(['jquery','XRegExp'],
 
             // and launch the framework...
             require([ 'spinner', 'databaseUtils', 'opendatakit', 'database', 'parsequery',
-                            'builder', 'controller', 'd3', 'jqueryCsv', 'combodate'],
+                            'builder', 'controller', 'd3', 'jqueryCsv', 'datetimepicker'],
             function(spinner,   databaseUtils, opendatakit,   database,  parsequery,
                              builder,   controller,   d3,   jqueryCsv) {
                 verifyLoad('main.require.framework.loaded',
-                    ['combodate', 'spinner', 'databaseUtils', 'opendatakit', 'database','parsequery',
+                    ['datetimepicker', 'spinner', 'databaseUtils', 'opendatakit', 'database','parsequery',
                             'builder', 'controller', 'd3', 'jqueryCsv'],
-                    [ $.fn.combodate,   spinner,  databaseUtils,  opendatakit,   database,  parsequery,
+                    [ $.fn.datetimepicker,   spinner,  databaseUtils,  opendatakit,   database,  parsequery,
                              builder,   controller,   d3,   jqueryCsv]);
 
 

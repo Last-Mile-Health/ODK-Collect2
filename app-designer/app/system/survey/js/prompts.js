@@ -1,13 +1,13 @@
 /**
  * All  the standard prompts available to a form designer.
  */
-define(['database','opendatakit','controller','backbone','moment','formulaFunctions','handlebars','promptTypes','jquery','underscore','d3','handlebarsHelpers','combodate'],
+define(['database','opendatakit','controller','backbone','moment','formulaFunctions','handlebars','promptTypes','jquery','underscore','d3','handlebarsHelpers','datetimepicker'],
 function(database,  opendatakit,  controller,  Backbone,  moment,  formulaFunctions,  Handlebars,  promptTypes,  $,       _,           d3,   _hh) {
 'use strict';
 /* global odkCommon, odkSurvey */
 verifyLoad('prompts',
-    ['database','opendatakit','controller','backbone','moment', 'formulaFunctions','handlebars','promptTypes','jquery','underscore','d3', 'handlebarsHelpers','combodate'],
-    [ database,  opendatakit,  controller,  Backbone,  moment,   formulaFunctions,  Handlebars,  promptTypes,  $,       _,           d3,   _hh,           $.fn.combodate] );
+    ['database','opendatakit','controller','backbone','moment', 'formulaFunctions','handlebars','promptTypes','jquery','underscore','d3', 'handlebarsHelpers','datetimepicker'],
+    [ database,  opendatakit,  controller,  Backbone,  moment,   formulaFunctions,  Handlebars,  promptTypes,  $,       _,           d3,   _hh,           $.fn.datetimepicker] );
 
 promptTypes.base = Backbone.View.extend({
     className: "odk-base",
@@ -2031,18 +2031,10 @@ promptTypes.datetime = promptTypes.input_type.extend({
         var that = this;
         odkCommon.log('D',"prompts." + that.type + ".modification px: " + that.promptIdx);
         if ( !that.insideAfterRender ) {
-            var formattedDateValue = that.$('input').combodate('getValue', null);
-            var value = null;
-            if (formattedDateValue !== null && formattedDateValue !== undefined && !(_.isEmpty(formattedDateValue))) {
-                if (that.type === "time") {
-                    var newDate = new Date();
-                    formattedDateValue.year(newDate.getUTCFullYear());
-                    formattedDateValue.month(newDate.getUTCMonth());
-                    formattedDateValue.date(newDate.getUTCDate());
-                }
-                value = new Date(formattedDateValue);
-            }
-            
+          var date_value = that.$('input').data('DateTimePicker').getValue();
+          var value = (date_value === undefined || date_value === null) ? null : date_value.toDate();
+          var formattedDateValue = moment(value).format(that.timeFormat);
+
             //
             // we are using a date pop-up.  If an earlier action fails, we should not
             // attempt to apply the state changes of this pop-up. Tolerate the loss
@@ -2106,8 +2098,14 @@ promptTypes.datetime = promptTypes.input_type.extend({
                 that.dtp.destroy();
             }
 
-            that.$('input').combodate({format: this.timeFormat, template: this.timeTemplate});
-            
+            if (that.showDate && !that.showTime) {
+              that.$('input').datetimepicker({pickTime: false, format: this.timeFormat});
+            } else if (!that.showDate && that.showTime) {
+              that.$('input').datetimepicker({pickDate: false, format: this.timeFormat});
+            } else {
+              that.$('input').datetimepicker({format: this.timeFormat});
+            }
+
             var inputElement = that.$('input');
             that.dtp = inputElement.data('DateTimePicker');
 
@@ -2116,7 +2114,7 @@ promptTypes.datetime = promptTypes.input_type.extend({
     },
     beforeMove: function() {
         // the spinner will have already saved the value
-        // destroy the combodate if it is still present
+        // destroy the datetimepicker if it is still present
         var that = this;
 
         if (that.dtp) {
@@ -3454,4 +3452,3 @@ promptTypes.acknowledge = promptTypes.select.extend({
 
 return promptTypes;
 });
-
