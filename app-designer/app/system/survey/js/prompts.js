@@ -1957,9 +1957,9 @@ promptTypes.datetime = promptTypes.input_type.extend({
     showTime: true,
     dtp: null,
     events: {
+        "dp.hide": "modification",
         "swipeleft input": "stopPropagation",
-        "swiperight input": "stopPropagation",
-        "change input": "modification"
+        "swiperight input": "stopPropagation"
     },
     loseFocus: function(evt) {
         var that = this;
@@ -2031,7 +2031,7 @@ promptTypes.datetime = promptTypes.input_type.extend({
         var that = this;
         odkCommon.log('D',"prompts." + that.type + ".modification px: " + that.promptIdx);
         if ( !that.insideAfterRender ) {
-          var date_value = that.$('input').data('DateTimePicker').getValue();
+          var date_value = that.$('input').data('DateTimePicker').getDate();
           var value = (date_value === undefined || date_value === null) ? null : date_value.toDate();
           var formattedDateValue = moment(value).format(that.timeFormat);
 
